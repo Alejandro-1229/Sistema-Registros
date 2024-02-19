@@ -10,17 +10,31 @@ class LicenciaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function getAll()
     {
         //
+        try {
+
+            $valor = Licencia::all();
+
+            return response()->json($valor, 200);
+
+        } catch (\Throwable $th) {
+            return response()->json(['ERROR EN LA CONSULTA' => $th->getMessage()], 500);
+        }
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
         //
+        $licencia = Licencia::create([
+            'activo' => $request->input('activo')
+        ]);
+
+        return response()->json($licencia,200);
     }
 
     /**

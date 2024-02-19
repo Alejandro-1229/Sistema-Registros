@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('licencias', function (Blueprint $table) {
-            $table->id();
+            $table->id('idLice');
+            $table->boolean('activo');
             $table->timestamps();
         });
     }

@@ -2,25 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Funcion;
+use App\Models\Expediente;
 use Illuminate\Http\Request;
 
-class FuncionController extends Controller
+class ExpedienteController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function getAll()
+    public function index()
     {
-        try {
-
-            $result = Funcion::all();
-
-            return response()->json($result, 200);
-
-        } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()],500);
-        }
+        //
     }
 
     /**
@@ -42,7 +34,7 @@ class FuncionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Funcion $funcion)
+    public function show(Expediente $expediente)
     {
         //
     }
@@ -50,7 +42,7 @@ class FuncionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Funcion $funcion)
+    public function edit(Expediente $expediente)
     {
         //
     }
@@ -58,7 +50,7 @@ class FuncionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Funcion $funcion)
+    public function update(Request $request, Expediente $expediente)
     {
         //
     }
@@ -66,7 +58,7 @@ class FuncionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Funcion $funcion)
+    public function destroy(Expediente $expediente)
     {
         //
     }

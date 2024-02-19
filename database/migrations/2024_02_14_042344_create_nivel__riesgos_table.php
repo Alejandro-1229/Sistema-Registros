@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('nivel__riesgos', function (Blueprint $table) {
-            $table->id();
+            $table->id('idNiRi');
+            $table->string('descripcion');
             $table->timestamps();
         });
     }

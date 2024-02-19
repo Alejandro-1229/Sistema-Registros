@@ -7,13 +7,15 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * Run the migrations. 
      */
     public function up(): void
     {
         Schema::create('tipo__itses', function (Blueprint $table) {
-            $table->id();
+            $table->id('idTiIt');
+            $table->string('descripcion');
             $table->timestamps();
+            $table->index('descripcion');
         });
     }
 
