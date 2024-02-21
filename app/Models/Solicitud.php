@@ -17,6 +17,6 @@ class Solicitud extends Model
     }
 
     protected $fillable = [
-        'descripcion'
+        'solicitud'
     ];
 } 

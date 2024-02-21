@@ -13,10 +13,10 @@ class Tipo_Itse extends Model
     protected $primaryKey = 'idTiIt';
     
     public function control():HasMany{
-        return $this->hasMany(control::class, 'idTipoItse', 'idTiIt');
+        return $this->hasMany(control::class, ' idTipoItse', 'idTiIt');
     }
 
     protected $fillable = [
-        'descripcion'
+        'tipo_itse'
     ];
 }

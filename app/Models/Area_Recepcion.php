@@ -17,7 +17,7 @@ class Area_Recepcion extends Model
     }
 
     protected $fillable = [
-        'descripcion'
+        'area'
     ];
 }
 

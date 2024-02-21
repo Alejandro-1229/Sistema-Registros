@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Responses\ApiResponse;
 use App\Models\Funcion;
 use Illuminate\Http\Request;
 
@@ -12,14 +13,14 @@ class FuncionController extends Controller
      */
     public function getAll()
     {
-        try {
+        try { 
 
             $result = Funcion::all();
 
-            return response()->json($result, 200);
+            return ApiResponse::success("Solicitud Exitosa", 200, $result);
 
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()],500);
+            return ApiResponse::error($th->getMessage(),500);
         }
     }
 

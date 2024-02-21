@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Responses\ApiResponse;
 use App\Models\Licencia;
 use Illuminate\Http\Request;
 
@@ -15,12 +16,12 @@ class LicenciaController extends Controller
         //
         try {
 
-            $valor = Licencia::all();
+            $result = Licencia::all();
 
-            return response()->json($valor, 200);
+            return ApiResponse::success("Solicitud Exitosa", 200, $result);
 
         } catch (\Throwable $th) {
-            return response()->json(['ERROR EN LA CONSULTA' => $th->getMessage()], 500);
+            return ApiResponse::error($th->getMessage(),500);
         }
     }
 

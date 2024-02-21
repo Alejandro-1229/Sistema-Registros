@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('ruc',15);
             $table->foreignId('idControl')->constrained('controls','idCont')->cascadeOnUpdate()->nullOnDelete();
             $table->date('fechaIngresoMesaPartes');
-            $table->date('fechaIngresoSGDC');
+            $table->date('fechaIngresoSGDC'); 
             $table->date('fechaRecepcionInspeccion');
             $table->date('recepcionLicenciaFuncionamiento');
             $table->date('fechaLimiteInspeccion');

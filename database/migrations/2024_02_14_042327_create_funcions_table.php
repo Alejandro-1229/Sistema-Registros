@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('funcions', function (Blueprint $table) {
             $table->id('idFunc');
-            $table->string('descripcion');
+            $table->string('funcion');
             $table->timestamps(); 
-            $table->index('descripcion');
+            $table->index('funcion');
         });
     }
 

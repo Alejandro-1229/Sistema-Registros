@@ -15,9 +15,9 @@ return new class extends Migration
         Schema::create('controls', function (Blueprint $table) {
             $table->id('idCont');
             $table->string('numeroExpediente',10)->unique();
-            $table->foreignId('idTipoItse')->constrained('tipo_itses', 'idTiIt')->cascadeOnUpdate()->nullOnDelete();
+            $table->foreignId('idTipoItse')->constrained('tipo__itses', 'idTiIt')->cascadeOnUpdate()->nullOnDelete();
             $table->foreignId('idFuncion')->constrained('funcions','idFunc')->cascadeOnUpdate()->nullOnDelete();
-            $table->foreignId('idNivelRiesgo')->constrained('nivel_riesgos','idNiRi')->cascadeOnUpdate()->nullOnDelete();
+            $table->foreignId('idNivelRiesgo')->constrained('nivel__riesgos','idNiRi')->cascadeOnUpdate()->nullOnDelete();
             $table->string('razonSocial',100);
             $table->string('nombreEstablecimiento',100)->nullable;
             $table->string('giroDelNegocio',150);

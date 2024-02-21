@@ -22,12 +22,14 @@ class Expediente extends Model
         'fechaIngresoMesaPartes',
         'fechaIngresoSGDC',
         'fechaRecepcionInspeccion',
-        'recepcionLicenciFuncionamiento',
+        'recepcionLicenciaFuncionamiento',
         'fechaLimiteInspeccion',
         'numeroInforme',
         'estado',
         'fecha',
         'hora',
-        'ILO'
+        'ILO',
     ];
+
+    
 }

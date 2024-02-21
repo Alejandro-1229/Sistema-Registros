@@ -17,6 +17,6 @@ class Funcion extends Model
     }
 
     protected $fillable = [
-        'descripcion'
+        'funcion'
     ];
 }

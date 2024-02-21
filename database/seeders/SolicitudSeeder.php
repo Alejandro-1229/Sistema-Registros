@@ -15,19 +15,22 @@ class SolicitudSeeder extends Seeder
     {
         //
         Solicitud::create([
-            'descripcion' => 'Aprobada'
+            'solicitud' => ' '
         ]);
         Solicitud::create([
-            'descripcion' => 'Denegado'
+            'solicitud' => 'Aprobada'
         ]);
         Solicitud::create([
-            'descripcion' => 'Abandonado'
+            'solicitud' => 'Denegado'
         ]);
         Solicitud::create([
-            'descripcion' => 'En tramite'
+            'solicitud' => 'Abandonado'
         ]);
         Solicitud::create([
-            'descripcion' => 'Otros'
+            'solicitud' => 'En tramite'
+        ]);
+        Solicitud::create([
+            'solicitud' => 'Otros'
         ]);
     }
 }

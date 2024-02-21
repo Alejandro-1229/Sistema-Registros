@@ -15,22 +15,25 @@ class AreaRecepcionSeeder extends Seeder
     {
         //
         Area_Recepcion::create([
-            'descripcion' => 'Mesa de Partes'
+            'area' => ' '
         ]);
         Area_Recepcion::create([
-            'descripcion' => 'Licencia'
+            'area' => 'Mesa de Partes'
         ]);
         Area_Recepcion::create([
-            'descripcion' => 'Subgerencia'
+            'area' => 'Licencia'
         ]);
         Area_Recepcion::create([
-            'descripcion' => 'Ingeniería'
+            'area' => 'Subgerencia'
         ]);
         Area_Recepcion::create([
-            'descripcion' => 'Area Legal'
+            'area' => 'Ingeniería'
         ]);
         Area_Recepcion::create([
-            'descripcion' => 'Administracion'
+            'area' => 'Area Legal'
+        ]);
+        Area_Recepcion::create([
+            'area' => 'Administracion'
         ]);
     }
 }

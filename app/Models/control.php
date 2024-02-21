@@ -17,7 +17,7 @@ class control extends Model
         return $this->belongsTo(Tipo_Itse::class, 'idTipoItse', 'idTiIt');
     }
     public function funcion():BelongsTo{
-        return $this->belongsTo(funcion::class, 'idFuncion'. 'idFunc');
+        return $this->belongsTo(funcion::class,'idFuncion','idFunc');
     }
     public function nivelRiesgo():BelongsTo{
         return $this->belongsTo(Nivel_Riesgo::class, 'idNivelRiesgo', 'idNiRi');
@@ -75,10 +75,5 @@ class control extends Model
         'numeroObservaciones',
         'idAreaRecepcion',
         'pagoDerechoInspeccion'
-
-
-
-
-
     ];
 }

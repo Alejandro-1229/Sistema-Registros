@@ -11,7 +11,7 @@ class ControlRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -33,7 +33,7 @@ class ControlRequest extends FormRequest
             'fechaIngreso' => 'required|date',
             'fechaIngresoSGDC' => 'required|date',
             'barrio' => 'nullable|string|max:10',
-            'nombreHabilitacionsUrbana' => 'required|string|max:100',
+            'nombreHabilitacionUrbana' => 'required|string|max:100',
             'areaOcupada' => 'required|string|max:15',
             'numeroPisos' => 'required|string|max:10',
             'manzana' => 'nullable|string|max:10',

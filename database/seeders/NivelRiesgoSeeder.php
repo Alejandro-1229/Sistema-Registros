@@ -15,19 +15,26 @@ class NivelRiesgoSeeder extends Seeder
     {
         //
         Nivel_Riesgo::create([
-            'descripcion' => 'ECSE'
+            'nivel_riesgo' => ' '
         ]);
         Nivel_Riesgo::create([
-            'descripcion' => 'Muy Alto'
+            'nivel_riesgo' => 'Bajo'
         ]);
         Nivel_Riesgo::create([
-            'descripcion' => 'Alto'
+            'nivel_riesgo' => 'Medio'
         ]);
         Nivel_Riesgo::create([
-            'descripcion' => 'Medio'
+            'nivel_riesgo' => 'Alto'
         ]);
         Nivel_Riesgo::create([
-            'descripcion' => 'Bajo'
+            'nivel_riesgo' => 'Muy Alto'
         ]);
+        Nivel_Riesgo::create([
+            'nivel_riesgo' => 'ECSE'
+        ]);
+        
+        
+        
+        
     }
 }

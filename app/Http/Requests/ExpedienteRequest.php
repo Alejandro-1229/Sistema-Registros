@@ -11,7 +11,7 @@ class ExpedienteRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,6 +23,21 @@ class ExpedienteRequest extends FormRequest
     {
         return [
             //
+            'ruc' => 'required|string|max:15',
+            'idControl' => 'required|integer|exists:controls,idCont',
+            'fechaIngresoMesaPartes' => 'required|date',
+            'fechaIngresoSGDC' => 'required|date',
+            'fechaRecepcionInspeccion' => 'required|date',
+            'recepcionLicenciaFuncionamiento' => 'required|date',
+            'fechaLimiteInspeccion' => 'required|date',
+            'numeroInforme' => 'nullable|max:10',
+            'estado' => 'nullable',
+            'fecha' => 'nullable|date',
+            'hora' => 'nullable',
+            'ILO' => 'nullable|date'
         ];
+        
+
+        
     }
 }

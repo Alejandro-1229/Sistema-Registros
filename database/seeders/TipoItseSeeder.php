@@ -15,10 +15,13 @@ class TipoItseSeeder extends Seeder
     {
         //
         Tipo_Itse::create([
-            'descripcion' => 'Previa'
+            'tipo_itse' => ' '
         ]);
         Tipo_Itse::create([
-            'descripcion' => 'Posterior'
+            'tipo_itse' => 'Previa'
+        ]);
+        Tipo_Itse::create([
+            'tipo_itse' => 'Posterior'
         ]);
     }
 }

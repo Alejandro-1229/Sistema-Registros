@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('nivel__riesgos', function (Blueprint $table) {
             $table->id('idNiRi');
-            $table->string('descripcion');
+            $table->string('nivel_riesgo');
             $table->timestamps();
         });
     }

@@ -3,35 +3,78 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ControlRequest;
+use App\Http\Responses\ApiResponse;
 use App\Models\control;
+use App\Models\Funcion;
 use Illuminate\Http\Request;
-use PhpParser\Node\Stmt\TryCatch;
+
+use function PHPUnit\Framework\isEmpty;
 
 class ControlController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
+
+
     public function getAll()
     {
         try {
+            $result = control::with('tipoItse', 'nivelRiesgo', 'solicitud', 'areaRecepcion', 'licencia', 'funcion')->get();
 
-            $result = control::all();
+            $extraccionDatos = function ($funcion) {
+                $data = [
+                    'numeroExpediente' => $funcion->numeroExpediente,
+                    'tipoItse' => $funcion->tipoItse->tipo_itse,
+                    'funcion' => $funcion->funcion->funcion,
+                    'nivelRiesgo' => $funcion->nivelRiesgo->nivel_riesgo,
+                    'nombreComercial' => $funcion->razonSocial,
+                    'giroNegocio' => $funcion->giroDelNegocio,
+                    'datosSolicitante' => $funcion->datosSolicitante,
+                    'fechaIngreso' => $funcion->fechaIngreso,
+                    'fechaIngresoSGDC' => $funcion->fechaIngresoSGDC,
+                    'barrio' => $funcion->barrio,
+                    'nombreHabilitacionUrbana' => $funcion->nombreHabilitacionUrbana,
+                    'areaOcupada' => $funcion->areaOcupada,
+                    'numeroPisos' => $funcion->numeroPisos,
+                    'manzana' => $funcion->manzana,
+                    'lote' => $funcion->lote,
+                    'tipoVia' => $funcion->tipoVia,
+                    'nombreVia' => $funcion->nombreVia,
+                    'numeroMunicipal' => $funcion->numeroMunicipal,
+                    'licencia' => $funcion->licencia->activo,
+                    'solicitud' => $funcion->solicitud->solicitud,
+                    'fechaResolucion' => $funcion->fechaResolucion,
+                    'numeroResolucion' => $funcion->numeroResolucion,
+                    'numeroCertificado' => $funcion->numeroCertificado,
+                    'vigenciaCertificado' => $funcion->vigenciaCertificado,
+                    'inspector_1' => $funcion->inspector_1,
+                    'inspector_2' => $funcion->inspector_2,
+                    'fechaInspeccion_1' => $funcion->fechaInspeccion_1,
+                    'fechaInspeccion_2' => $funcion->fechaInspeccion_2,
+                    'fechaInspeccion_3' => $funcion->fechaInspeccion_3,
+                    'fechaInspeccionILO' => $funcion->fechaInspeccionILO,
+                    'fechaDevolucion_1' => $funcion->fechaDevolucion_1,
+                    'fechaDevolucion_2' => $funcion->fechaDevolucion_2,
+                    'numeroObservaciones' => $funcion->numeroObservaciones,
+                    'areaRecepcion' => $funcion->areaRecepcion->area,
+                    'pagoDerechoInspeccion' => $funcion->pagoDerechoInspeccion,
 
-            return response()->json($result, 200);
+                ];
+                return $data;
+            };
 
+
+            $controles = $result->map($extraccionDatos);
+
+            return ApiResponse::success("Solicitud Exitosa", 200, $controles);
         } catch (\Throwable $th) {
-            return response()->json(['error' => $th->getMessage()],500);
+            return ApiResponse::error($th->getMessage(), 500);
         }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create(ControlRequest $request)
     {
-        //
-        try{
+
+        try {
 
             $control = Control::create([
                 'numeroExpediente' => $request->input('numeroExpediente'),
@@ -72,40 +115,240 @@ class ControlController extends Controller
                 'pagoDerechoInspeccion' => $request->input('pagoDerechoInspeccion')
             ]);
 
-            $data = [
-                'Message' => 'Control Created succesfull',
-                'Control' => $control
-            ];
-            return response()->json($data, 200);
-
-        }catch(\Throwable $th){
-            return response()->json(['error' => $th->getMessage()],500);
+            return ApiResponse::success("Creacion Satisfactoria", 201, $control);
+        } catch (\Throwable $th) {
+            return ApiResponse::error($th->getMessage(), 500);
         }
-        
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function filtroRazonSocial(string $nombreComercial)
     {
         //
-    }
+        $razonSocialControl = control::with('tipoItse', 'nivelRiesgo', 'solicitud', 'areaRecepcion', 'licencia', 'funcion')
+            ->where('controls.razonSocial', "like", '%' . $nombreComercial . '%')
+            ->get();
+        if ($razonSocialControl->isEmpty()) {
+            $controlRazonSocial = 'La data está vacía prueba con otro nombre';
+        } else {
+            $extraccionDatos = function ($funcion) {
+                $data = [
+                    'numeroExpediente' => $funcion->numeroExpediente,
+                    'tipoItse' => $funcion->tipoItse->tipo_itse,
+                    'funcion' => $funcion->funcion->funcion,
+                    'nivelRiesgo' => $funcion->nivelRiesgo->nivel_riesgo,
+                    'nombreComercial' => $funcion->razonSocial,
+                    'giroNegocio' => $funcion->giroDelNegocio,
+                    'datosSolicitante' => $funcion->datosSolicitante,
+                    'fechaIngreso' => $funcion->fechaIngreso,
+                    'fechaIngresoSGDC' => $funcion->fechaIngresoSGDC,
+                    'barrio' => $funcion->barrio,
+                    'nombreHabilitacionUrbana' => $funcion->nombreHabilitacionUrbana,
+                    'areaOcupada' => $funcion->areaOcupada,
+                    'numeroPisos' => $funcion->numeroPisos,
+                    'manzana' => $funcion->manzana,
+                    'lote' => $funcion->lote,
+                    'tipoVia' => $funcion->tipoVia,
+                    'nombreVia' => $funcion->nombreVia,
+                    'numeroMunicipal' => $funcion->numeroMunicipal,
+                    'licencia' => $funcion->licencia->activo,
+                    'solicitud' => $funcion->solicitud->solicitud,
+                    'fechaResolucion' => $funcion->fechaResolucion,
+                    'numeroResolucion' => $funcion->numeroResolucion,
+                    'numeroCertificado' => $funcion->numeroCertificado,
+                    'vigenciaCertificado' => $funcion->vigenciaCertificado,
+                    'inspector_1' => $funcion->inspector_1,
+                    'inspector_2' => $funcion->inspector_2,
+                    'fechaInspeccion_1' => $funcion->fechaInspeccion_1,
+                    'fechaInspeccion_2' => $funcion->fechaInspeccion_2,
+                    'fechaInspeccion_3' => $funcion->fechaInspeccion_3,
+                    'fechaInspeccionILO' => $funcion->fechaInspeccionILO,
+                    'fechaDevolucion_1' => $funcion->fechaDevolucion_1,
+                    'fechaDevolucion_2' => $funcion->fechaDevolucion_2,
+                    'numeroObservaciones' => $funcion->numeroObservaciones,
+                    'areaRecepcion' => $funcion->areaRecepcion->area,
+                    'pagoDerechoInspeccion' => $funcion->pagoDerechoInspeccion,
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(control $control)
-    {
-        //
-    }
+                ];
+                return $data;
+            };
+            $controlRazonSocial = $razonSocialControl->map($extraccionDatos);
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(control $control)
+
+        return ApiResponse::success("Solicitud Exitosa", 200, $controlRazonSocial);
+    }
+    public function filtroFuncion(int $id)
     {
         //
+        $funcionControl = control::with('tipoItse', 'nivelRiesgo', 'solicitud', 'areaRecepcion', 'licencia', 'funcion')
+            ->where('controls.idFuncion', "=", $id)
+            ->get();
+        if ($funcionControl->isEmpty()) {
+            $controlFunciones = 'La data está vacía prueba con otro';
+        } else {
+            $extraccionDatos = function ($funcion) {
+                $data = [
+                    'numeroExpediente' => $funcion->numeroExpediente,
+                    'tipoItse' => $funcion->tipoItse->tipo_itse,
+                    'funcion' => $funcion->funcion->funcion,
+                    'nivelRiesgo' => $funcion->nivelRiesgo->nivel_riesgo,
+                    'nombreComercial' => $funcion->razonSocial,
+                    'giroNegocio' => $funcion->giroDelNegocio,
+                    'datosSolicitante' => $funcion->datosSolicitante,
+                    'fechaIngreso' => $funcion->fechaIngreso,
+                    'fechaIngresoSGDC' => $funcion->fechaIngresoSGDC,
+                    'barrio' => $funcion->barrio,
+                    'nombreHabilitacionUrbana' => $funcion->nombreHabilitacionUrbana,
+                    'areaOcupada' => $funcion->areaOcupada,
+                    'numeroPisos' => $funcion->numeroPisos,
+                    'manzana' => $funcion->manzana,
+                    'lote' => $funcion->lote,
+                    'tipoVia' => $funcion->tipoVia,
+                    'nombreVia' => $funcion->nombreVia,
+                    'numeroMunicipal' => $funcion->numeroMunicipal,
+                    'licencia' => $funcion->licencia->activo,
+                    'solicitud' => $funcion->solicitud->solicitud,
+                    'fechaResolucion' => $funcion->fechaResolucion,
+                    'numeroResolucion' => $funcion->numeroResolucion,
+                    'numeroCertificado' => $funcion->numeroCertificado,
+                    'vigenciaCertificado' => $funcion->vigenciaCertificado,
+                    'inspector_1' => $funcion->inspector_1,
+                    'inspector_2' => $funcion->inspector_2,
+                    'fechaInspeccion_1' => $funcion->fechaInspeccion_1,
+                    'fechaInspeccion_2' => $funcion->fechaInspeccion_2,
+                    'fechaInspeccion_3' => $funcion->fechaInspeccion_3,
+                    'fechaInspeccionILO' => $funcion->fechaInspeccionILO,
+                    'fechaDevolucion_1' => $funcion->fechaDevolucion_1,
+                    'fechaDevolucion_2' => $funcion->fechaDevolucion_2,
+                    'numeroObservaciones' => $funcion->numeroObservaciones,
+                    'areaRecepcion' => $funcion->areaRecepcion->area,
+                    'pagoDerechoInspeccion' => $funcion->pagoDerechoInspeccion,
+
+                ];
+                return $data;
+            };
+
+            $controlFunciones = $funcionControl->map($extraccionDatos);
+        }
+
+
+
+        return ApiResponse::success("Solicitud Exitosa", 200, $controlFunciones);
+    }
+    public function filtroTipoItse(int $tipoItse)
+    {
+        //
+        $tipoItseControl = control::with('tipoItse', 'nivelRiesgo', 'solicitud', 'areaRecepcion', 'licencia', 'funcion')
+            ->where('controls.idTipoItse', "=", $tipoItse)
+            ->get();
+        if ($tipoItseControl->isEmpty()) {
+            $controlTipoItse = 'La data está vacía prueba con otro nombre';
+        } else {
+            $extraccionDatos = function ($funcion) {
+                $data = [
+                    'numeroExpediente' => $funcion->numeroExpediente,
+                    'tipoItse' => $funcion->tipoItse->tipo_itse,
+                    'funcion' => $funcion->funcion->funcion,
+                    'nivelRiesgo' => $funcion->nivelRiesgo->nivel_riesgo,
+                    'nombreComercial' => $funcion->razonSocial,
+                    'giroNegocio' => $funcion->giroDelNegocio,
+                    'datosSolicitante' => $funcion->datosSolicitante,
+                    'fechaIngreso' => $funcion->fechaIngreso,
+                    'fechaIngresoSGDC' => $funcion->fechaIngresoSGDC,
+                    'barrio' => $funcion->barrio,
+                    'nombreHabilitacionUrbana' => $funcion->nombreHabilitacionUrbana,
+                    'areaOcupada' => $funcion->areaOcupada,
+                    'numeroPisos' => $funcion->numeroPisos,
+                    'manzana' => $funcion->manzana,
+                    'lote' => $funcion->lote,
+                    'tipoVia' => $funcion->tipoVia,
+                    'nombreVia' => $funcion->nombreVia,
+                    'numeroMunicipal' => $funcion->numeroMunicipal,
+                    'licencia' => $funcion->licencia->activo,
+                    'solicitud' => $funcion->solicitud->solicitud,
+                    'fechaResolucion' => $funcion->fechaResolucion,
+                    'numeroResolucion' => $funcion->numeroResolucion,
+                    'numeroCertificado' => $funcion->numeroCertificado,
+                    'vigenciaCertificado' => $funcion->vigenciaCertificado,
+                    'inspector_1' => $funcion->inspector_1,
+                    'inspector_2' => $funcion->inspector_2,
+                    'fechaInspeccion_1' => $funcion->fechaInspeccion_1,
+                    'fechaInspeccion_2' => $funcion->fechaInspeccion_2,
+                    'fechaInspeccion_3' => $funcion->fechaInspeccion_3,
+                    'fechaInspeccionILO' => $funcion->fechaInspeccionILO,
+                    'fechaDevolucion_1' => $funcion->fechaDevolucion_1,
+                    'fechaDevolucion_2' => $funcion->fechaDevolucion_2,
+                    'numeroObservaciones' => $funcion->numeroObservaciones,
+                    'areaRecepcion' => $funcion->areaRecepcion->area,
+                    'pagoDerechoInspeccion' => $funcion->pagoDerechoInspeccion,
+
+                ];
+                return $data;
+            };
+            $controlTipoItse = $tipoItseControl->map($extraccionDatos);
+        }
+
+
+        return ApiResponse::success("Solicitud Exitosa", 200, $controlTipoItse);
+    }
+    public function filtroNumeroExpediente(string $numeroExpediente)
+    {
+        //
+        $numeroExpedienteControl = control::with('tipoItse', 'nivelRiesgo', 'solicitud', 'areaRecepcion', 'licencia', 'funcion')
+            ->where('controls.numeroExpediente', "=", $numeroExpediente)
+            ->get();
+        if ($numeroExpedienteControl->isEmpty()) {
+            $controlNumeroExpediente = 'La data está vacía prueba con otro nombre';
+        } else {
+            $extraccionDatos = function ($funcion) {
+                $data = [
+                    'numeroExpediente' => $funcion->numeroExpediente,
+                    'tipoItse' => $funcion->tipoItse->tipo_itse,
+                    'funcion' => $funcion->funcion->funcion,
+                    'nivelRiesgo' => $funcion->nivelRiesgo->nivel_riesgo,
+                    'nombreComercial' => $funcion->razonSocial,
+                    'giroNegocio' => $funcion->giroDelNegocio,
+                    'datosSolicitante' => $funcion->datosSolicitante,
+                    'fechaIngreso' => $funcion->fechaIngreso,
+                    'fechaIngresoSGDC' => $funcion->fechaIngresoSGDC,
+                    'barrio' => $funcion->barrio,
+                    'nombreHabilitacionUrbana' => $funcion->nombreHabilitacionUrbana,
+                    'areaOcupada' => $funcion->areaOcupada,
+                    'numeroPisos' => $funcion->numeroPisos,
+                    'manzana' => $funcion->manzana,
+                    'lote' => $funcion->lote,
+                    'tipoVia' => $funcion->tipoVia,
+                    'nombreVia' => $funcion->nombreVia,
+                    'numeroMunicipal' => $funcion->numeroMunicipal,
+                    'licencia' => $funcion->licencia->activo,
+                    'solicitud' => $funcion->solicitud->solicitud,
+                    'fechaResolucion' => $funcion->fechaResolucion,
+                    'numeroResolucion' => $funcion->numeroResolucion,
+                    'numeroCertificado' => $funcion->numeroCertificado,
+                    'vigenciaCertificado' => $funcion->vigenciaCertificado,
+                    'inspector_1' => $funcion->inspector_1,
+                    'inspector_2' => $funcion->inspector_2,
+                    'fechaInspeccion_1' => $funcion->fechaInspeccion_1,
+                    'fechaInspeccion_2' => $funcion->fechaInspeccion_2,
+                    'fechaInspeccion_3' => $funcion->fechaInspeccion_3,
+                    'fechaInspeccionILO' => $funcion->fechaInspeccionILO,
+                    'fechaDevolucion_1' => $funcion->fechaDevolucion_1,
+                    'fechaDevolucion_2' => $funcion->fechaDevolucion_2,
+                    'numeroObservaciones' => $funcion->numeroObservaciones,
+                    'areaRecepcion' => $funcion->areaRecepcion->area,
+                    'pagoDerechoInspeccion' => $funcion->pagoDerechoInspeccion,
+
+                ];
+                return $data;
+            };
+            $controlNumeroExpediente = $numeroExpedienteControl->map($extraccionDatos);
+        }
+
+
+        return ApiResponse::success("Solicitud Exitosa", 200, $controlNumeroExpediente);
     }
 
     /**

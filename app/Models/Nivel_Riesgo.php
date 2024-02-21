@@ -17,6 +17,6 @@ class Nivel_Riesgo extends Model
     }
 
     protected $fillable = [
-        'descripcion'
+        'nivel_riesgo'
     ];
 }

@@ -15,28 +15,31 @@ class FuncionSeeder extends Seeder
     {
         //encuentro,comercio,administrativa,almacen,industrial,educacion,hospedaje y salud
         Funcion::create([
-            'descripcion' => 'Encuentro'
+            'funcion' => ''
         ]);
         Funcion::create([
-            'descripcion' => 'Comercio'
+            'funcion' => 'Encuentro'
         ]);
         Funcion::create([
-            'descripcion' => 'Administrativa'
+            'funcion' => 'Comercio'
         ]);
         Funcion::create([
-            'descripcion' => 'Almacen'
+            'funcion' => 'Administrativa'
         ]);
         Funcion::create([
-            'descripcion' => 'Industrial'
+            'funcion' => 'Almacen'
         ]);
         Funcion::create([
-            'descripcion' => 'Educacion'
+            'funcion' => 'Industrial'
         ]);
         Funcion::create([
-            'descripcion' => 'Hospedaje'
+            'funcion' => 'Educacion'
         ]);
         Funcion::create([
-            'descripcion' => 'Salud'
+            'funcion' => 'Hospedaje'
+        ]);
+        Funcion::create([
+            'funcion' => 'Salud'
         ]);
     }
 }
