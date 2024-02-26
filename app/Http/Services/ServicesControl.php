@@ -3,7 +3,7 @@
 namespace App\Http\Services;
 
 class ServicesControl{
-
+ 
     public function extraccionDatosControl($result){
         if ($result->isEmpty()) {
             $controles = 'No hay data en este apartado';

@@ -32,6 +32,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('v1/controles')->group(function(){
     Route::get('/', [ControlController::class,'getAll']);
     Route::post('/', [ControlController::class,'create']);
+    Route::get('/filterId/{id}', [ControlController::class,'filtroId']);
     Route::get('/filterFuncion/{idFuncion}', [ControlController::class,'filtroFuncion']);
     Route::get('/filterRazon/{nombreComercial}', [ControlController::class,'filtroRazonSocial']);
     Route::get('/filterExpediente/{expediente}', [ControlController::class,'filtroNumeroExpediente']);

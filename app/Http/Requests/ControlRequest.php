@@ -23,9 +23,9 @@ class ControlRequest extends FormRequest
     {
         return [
             'numeroExpediente' => 'required|string|max:10',
-            'idTipoItse' => 'required',
-            'idFuncion' => 'required',
-            'idNivelRiesgo' => 'required',
+            'idTipoItse' => 'required|integer|exists:tipo__itses,idTiIt',
+            'idFuncion' => 'required|integer|exists:funcions,idFunc',
+            'idNivelRiesgo' => 'required|integer|exists:nivel__riesgos,idNiRi',
             'razonSocial' => 'required|string|max:100',
             'nombreEstablecimiento' => 'nullable|max:100',
             'giroDelNegocio' => 'required|string|max:150',

@@ -22,14 +22,13 @@ class ExpedienteRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
-            'ruc' => 'required|string|max:15',
+            'ruc' => 'nullable|string|max:15',
             'idControl' => 'required|integer|exists:controls,idCont',
-            'fechaIngresoMesaPartes' => 'required|date',
-            'fechaIngresoSGDC' => 'required|date',
-            'fechaRecepcionInspeccion' => 'required|date',
-            'recepcionLicenciaFuncionamiento' => 'required|date',
-            'fechaLimiteInspeccion' => 'required|date',
+            'fechaIngresoMesaPartes' => 'nullable|date',
+            'fechaIngresoSGDC' => 'nullable|date',
+            'fechaRecepcionInspeccion' => 'nullable|date',
+            'recepcionLicenciaFuncionamiento' => 'nullable|date',
+            'fechaLimiteInspeccion' => 'nullable|date',
             'numeroInforme' => 'nullable|max:10',
             'estado' => 'nullable',
             'fecha' => 'nullable|date',

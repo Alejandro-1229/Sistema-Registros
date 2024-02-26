@@ -32,10 +32,13 @@ class control extends Model
         return $this->belongsTo(Area_Recepcion::class, 'idAreaRecepcion', 'idArRe');
     }
     public function expediente():HasMany{
-        return $this-> hasMany(expediente::class, 'idExpediente', 'idExpe'); 
+        return $this-> hasMany(expediente::class, 'idControl', 'idCont'); 
     }
     public function programacion():HasMany{
-        return $this->hasMany(programacion::class, 'idProgramacion','idProg');
+        return $this->hasMany(programacion::class,'idControl', 'idCont');
+    }
+    public function prorgamacionSemanal():HasMany{
+        return $this->hasMany(programacion::class, 'idControl','idCont');
     }
 
     protected $fillable = [

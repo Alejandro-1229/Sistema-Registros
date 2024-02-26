@@ -19,7 +19,7 @@ class ControlController extends Controller
 
 
     public function getAll()
-    {
+    { 
         try {
 
             $controles = $this->ControlConsulta->getAll();
@@ -30,13 +30,25 @@ class ControlController extends Controller
         }
     }
 
-    public function create($request)
+    public function create(ControlRequest $request)
     {
         try {
 
             $control = $this->ControlConsulta->create($request);
 
             return ApiResponse::success("Creacion Satisfactoria", 201, $control);
+        } catch (\Throwable $th) {
+            return ApiResponse::error($th->getMessage(), 500);
+        }
+    }
+
+    public function filtroId($id)
+    {
+        try {
+
+            $control = $this->ControlConsulta->filtroId($id);
+
+            return ApiResponse::success("Solicitud exitosa", 200, $control);
         } catch (\Throwable $th) {
             return ApiResponse::error($th->getMessage(), 500);
         }
@@ -90,14 +102,18 @@ class ControlController extends Controller
     }
 
 
-    public function update(Request $request, control $control)
+    public function update(Request $request, int $id)
     {
-        //
+        try {
+
+            $datoActualizado = $this->ControlConsulta->update($request,$id);
+
+            return ApiResponse::success("Solicitud Exitosa", 200, $datoActualizado);
+        } catch (\Throwable $th) {
+            return ApiResponse::error($th->getMessage(), 500);
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(control $control)
     {
         //

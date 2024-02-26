@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('expedientes', function (Blueprint $table) {
             $table->id('idExpe');
-            $table->string('ruc',15);
+            $table->string('ruc',15)->nullable();
             $table->foreignId('idControl')->constrained('controls','idCont')->cascadeOnUpdate()->nullOnDelete();
-            $table->date('fechaIngresoMesaPartes');
-            $table->date('fechaIngresoSGDC'); 
-            $table->date('fechaRecepcionInspeccion');
-            $table->date('recepcionLicenciaFuncionamiento');
-            $table->date('fechaLimiteInspeccion');
+            $table->date('fechaIngresoMesaPartes')->nullable();
+            $table->date('fechaIngresoSGDC')->nullable(); 
+            $table->date('fechaRecepcionInspeccion')->nullable();
+            $table->date('recepcionLicenciaFuncionamiento')->nullable();
+            $table->date('fechaLimiteInspeccion')->nullable();
             $table->string('numeroInforme',10)->nullable();
             $table->boolean('estado')->nullable();
             $table->date('fecha')->nullable();
