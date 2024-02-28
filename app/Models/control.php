@@ -37,9 +37,7 @@ class control extends Model
     public function programacion():HasMany{
         return $this->hasMany(programacion::class,'idControl', 'idCont');
     }
-    public function prorgamacionSemanal():HasMany{
-        return $this->hasMany(programacion::class, 'idControl','idCont');
-    }
+   
 
     protected $fillable = [
         'numeroExpediente',

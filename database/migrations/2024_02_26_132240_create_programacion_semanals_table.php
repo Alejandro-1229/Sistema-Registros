@@ -14,14 +14,13 @@ return new class extends Migration
         Schema::create('programacion_semanals', function (Blueprint $table) {
             $table->id('idPrSe');
             $table->date('fechaInspeccion')->nullable();
-            $table->integer('restoDias')->nullable();
-            $table->string('dias')->nullable();
+            $table->string('local')->nullable();
             $table->string('direccion')->nullable();
             $table->string('ingeniero_1')->nullable();
             $table->string('ingeniero_2')->nullable();
-            $table->char('realizado')->nullable();
+            $table->char('realizado',1)->nullable();
             $table->date('aplazo_fecha')->nullable();
-            $table->foreignId('idControl')->constrained('controls','idCont')->cascadeOnUpdate()->nullOnDelete();
+            $table->foreignId('idExpediente')->constrained('expedientes','idExpe')->cascadeOnUpdate()->nullOnDelete();
             $table->timestamps();
         });
     }

@@ -9,21 +9,21 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class programacion_semanal extends Model
 {
     use HasFactory;
-    protected $pimeryKey = 'idPrSe';
 
-    public function control():BelongsTo{
-        return $this->belongsTo(control::class,'idControl','idCont');
+    protected $primaryKey = 'idPrSe';
+
+    public function expediente():BelongsTo{
+        return $this->belongsTo(control::class,'idExpediente','idExpe');
     }
 
     protected $fillable = [
         'fechaInspeccion',
-        'restoDias',
         'local',
         'direccion',
-        'direccion_1',
-        'direccion_2',
+        'ingeniero_1',
+        'ingeniero_2',
         'realizado',
-        'aplazoFecha',
-        'idControl',
+        'aplazo_fecha',
+        'idExpediente',
     ];
 }

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Expediente extends Model
 {
@@ -14,6 +15,9 @@ class Expediente extends Model
 
     public function control():BelongsTo{
         return $this->belongsTo(control::class, 'idControl', 'idCont');
+    }
+    public function prorgamacionSemanal():HasMany{
+        return $this->hasMany(programacion::class, 'idExpediente','idExpe');
     }
 
     protected $fillable = [

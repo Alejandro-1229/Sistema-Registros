@@ -7,8 +7,10 @@ use App\Http\Controllers\FuncionController;
 use App\Http\Controllers\LicenciaController;
 use App\Http\Controllers\NivelRiesgoController;
 use App\Http\Controllers\ProgramacionController;
+use App\Http\Controllers\ProgramacionSemanalController;
 use App\Http\Controllers\SolicitudController;
 use App\Http\Controllers\TipoItseController;
+use App\Models\programacion_semanal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -37,6 +39,7 @@ Route::prefix('v1/controles')->group(function(){
     Route::get('/filterRazon/{nombreComercial}', [ControlController::class,'filtroRazonSocial']);
     Route::get('/filterExpediente/{expediente}', [ControlController::class,'filtroNumeroExpediente']);
     Route::get('/filterTipoItse/{tipoItse}', [ControlController::class,'filtroTipoItse']);
+    Route::put('/{id}',[ControlController::class,'update']);
 });
 Route::prefix('v1/expedientes')->group(function(){
     Route::get('/', [ExpedienteController::class,'getAll']);
@@ -46,6 +49,12 @@ Route::prefix('v1/programaciones')->group(function(){
     Route::get('/', [ProgramacionController::class,'getAll']);
     Route::post('/', [ProgramacionController::class,'create']);
 }); 
+Route::prefix('v1/programacionSemanal')->group(function(){
+    Route::get('/', [ProgramacionSemanalController::class,'getAll']);   
+    Route::post('/', [ProgramacionSemanalController::class,'create']);
+    Route::patch('/updateRealizado/{id}', [ProgramacionSemanalController::class,'updateRealizado']);
+    Route::patch('/updateAplazo/{id}', [ProgramacionSemanalController::class,'updateAplazoFecha']);
+});
 Route::prefix('v1/licencias')->group(function(){
     Route::get('/', [LicenciaController::class,'getAll']);
 });

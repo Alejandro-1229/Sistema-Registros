@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Consultas\ControlConsulta;
+use App\Http\Consultas\ControlUpdate;
 use App\Http\Requests\ControlRequest;
 use App\Http\Responses\ApiResponse;
 use App\Models\control;
@@ -11,10 +12,12 @@ use Illuminate\Http\Request;
 class ControlController extends Controller
 {
     protected $ControlConsulta;
+    protected $ControlUpdate;
 
-    public function __construct(ControlConsulta $ControlConsulta)
+    public function __construct(ControlConsulta $ControlConsulta, ControlUpdate $ControlUpdate)
     {
         $this->ControlConsulta = $ControlConsulta;
+        $this->ControlUpdate = $ControlUpdate;
     }
 
 
@@ -106,16 +109,11 @@ class ControlController extends Controller
     {
         try {
 
-            $datoActualizado = $this->ControlConsulta->update($request,$id);
+            $datoActualizado = $this->ControlUpdate->updateControl($request,$id);
 
-            return ApiResponse::success("Solicitud Exitosa", 200, $datoActualizado);
+            return ApiResponse::update("Actualizacion Exitosa", 200, $datoActualizado);
         } catch (\Throwable $th) {
             return ApiResponse::error($th->getMessage(), 500);
         }
-    }
-
-    public function destroy(control $control)
-    {
-        //
     }
 }

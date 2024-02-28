@@ -2,62 +2,85 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Consultas\ProgramacionSemanalConsulta;
+use App\Http\Consultas\ProgramacionSemanalUpdate;
+use App\Http\Requests\ProgramacionSemanalRequest;
+use App\Http\Responses\ApiResponse;
 use App\Models\programacion_semanal;
 use Illuminate\Http\Request;
 
 class ProgramacionSemanalController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+
+    protected $ProgramacionSemanalConsulta;
+    protected $ProgramacionSemanalUpdate;
+
+    public function __construct(ProgramacionSemanalConsulta $ProgramacionSemanalConsulta, ProgramacionSemanalUpdate $ProgramacionSemanalUpdate)
     {
-        //
+        $this->ProgramacionSemanalConsulta = $ProgramacionSemanalConsulta;
+        $this->ProgramacionSemanalUpdate = $ProgramacionSemanalUpdate;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function getAll()
     {
-        //
+        try {
+
+            $data = $this->ProgramacionSemanalConsulta->getAll();
+            return ApiResponse::success('Proceso Exitoso', 200, $data);
+        } catch (\Throwable $th) {
+            return ApiResponse::error($th->getMessage(), 500);
+        }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function create(ProgramacionSemanalRequest $request)
     {
-        //
+        try {
+            //creacion del elemento
+            programacion_semanal::create([
+                'idExpediente' => $request->input('idExpediente'),
+
+            ]);
+
+            //extraccion del ultimo elemento creado
+            $ultimaCreacion = programacion_semanal::latest()->first();
+            //extraccion del id del ultimo elemento creado
+            $idUltimaCreacion = json_decode($ultimaCreacion, true);
+            //se guarda el id en una variable
+            $idPrSe = $idUltimaCreacion['idPrSe'];
+
+            $dataUpdate = $this->ProgramacionSemanalUpdate->asignacionDatos($idPrSe);
+
+            return ApiResponse::success('Create Succesfull', 201, $dataUpdate);
+        } catch (\Throwable $th) {
+
+            return ApiResponse::success($th->getMessage(), 500);
+        }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(programacion_semanal $programacion_semanal)
+    public function updateRealizado($id)
     {
-        //
+        try {
+
+            $dataUpdateRealizado = $this->ProgramacionSemanalUpdate->updateRealizado($id);
+
+            return ApiResponse::update('Update Realize Succesfull', 200, $dataUpdateRealizado);
+        } catch (\Throwable $th) {
+            return ApiResponse::error($th->getMessage(), 500);
+        }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(programacion_semanal $programacion_semanal)
+    public function updateAplazoFecha(Request $request, $id)
     {
-        //
+        try {
+
+            $dataUpdateAplazoFecha = $this->ProgramacionSemanalUpdate->updateAplazoFecha($request, $id);
+
+            return ApiResponse::update('Update Date Succesfull', 200, $dataUpdateAplazoFecha);
+        } catch (\Throwable $th) {
+            return ApiResponse::error($th->getMessage(), 500);
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, programacion_semanal $programacion_semanal)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(programacion_semanal $programacion_semanal)
     {
         //
