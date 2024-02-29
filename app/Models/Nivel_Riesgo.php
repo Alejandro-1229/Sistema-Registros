@@ -8,11 +8,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Nivel_Riesgo extends Model
 {
-    use HasFactory;  
+    use HasFactory;
 
     protected $primaryKey = 'idNiRi';
-    
-    public function control():HasMany{
+
+    public function control(): HasMany
+    {
         return $this->hasMany(control::class, 'idNivelRiesgo', 'idNiRi');
     }
 

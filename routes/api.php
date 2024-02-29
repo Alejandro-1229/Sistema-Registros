@@ -49,11 +49,15 @@ Route::prefix('v1/programaciones')->group(function(){
     Route::get('/', [ProgramacionController::class,'getAll']);
     Route::post('/', [ProgramacionController::class,'create']);
 }); 
-Route::prefix('v1/programacionSemanal')->group(function(){
-    Route::get('/', [ProgramacionSemanalController::class,'getAll']);   
+Route::prefix('v1/programacionSemanal')->group(function(){  
     Route::post('/', [ProgramacionSemanalController::class,'create']);
-    Route::patch('/updateRealizado/{id}', [ProgramacionSemanalController::class,'updateRealizado']);
+    Route::get('/listadoPendientes', [ProgramacionSemanalController::class,'listPendiente']); 
+    Route::get('/listadoSilencioPositivo', [ProgramacionSemanalController::class,'listSilencioPositivo']);
+    Route::get('/listadoCancelados', [ProgramacionSemanalController::class,'listCancelado']);
+    Route::get('/verificacionFecha',[ProgramacionSemanalController::class, 'verificacionFechas']);
+    Route::patch('/updatePendiente/{id}', [ProgramacionSemanalController::class,'updatePendiente']);
     Route::patch('/updateAplazo/{id}', [ProgramacionSemanalController::class,'updateAplazoFecha']);
+    Route::patch('/updateCancelar/{id}', [ProgramacionSemanalController::class,'updateCancelar']);
 });
 Route::prefix('v1/licencias')->group(function(){
     Route::get('/', [LicenciaController::class,'getAll']);

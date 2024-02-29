@@ -4,7 +4,7 @@ namespace App\Http\Consultas;
 
 use App\Models\programacion_semanal;
 
-class ProgramacionSemanalUpdate 
+class ProgramacionSemanalUpdate
 {
 
     protected $ProgramacionSemanalConsulta;
@@ -14,39 +14,47 @@ class ProgramacionSemanalUpdate
         return $this->ProgramacionSemanalConsulta = $ProgramacionSemanalConsulta;
     }
 
-    public function updateAplazoFecha($request, $id)
+    public function updateStado(int $id, int $estado)
     {
         $programacion = programacion_semanal::findOrFail($id);
-        
         $programacion->update([
-            "aplazo_fecha" => $request->input('aplazo_fecha')
+            "realizado" => $estado,
+            "updated_at" => date('Y-m-d H:i')
         ]);
 
         return $programacion;
     }
 
-    public function updateRealizado(int $id)
+    public function updatePendiente($id)
     {
-        $programacion = programacion_semanal::findOrFail($id);
-
-        if ($programacion->realizado == 1) {
-            $programacion->update([
-                "realizado" => 0,
-                "updated_at" => date('Y-m-d H:i')
-            ]);
-
-        } else {
-            $programacion->update([
-                "realizado" => 1,
-                "updated_at" => date('Y-m-d H:i')
-            ]);
-        }
+        $programacion = $this->updateStado($id, 0);
 
         return $programacion;
     }
 
-    public function asignacionDatos($idPrSe){
+    public function updateRealizado($id)
+    {
+        $programacion = $this->updateStado($id, 1);
 
+        return $programacion;
+    }
+
+    public function updateSilencioPositivo($id)
+    {
+        $programacion = $this->updateStado($id, 2);
+
+        return $programacion;
+    }
+
+    public function updateCancelar($id)
+    {
+        $programacion = $this->updateStado($id, 3);
+
+        return $programacion;
+    }
+
+    public function asignacionDatos($idPrSe)
+    {
         $ultimoElementoStract = $this->ProgramacionSemanalConsulta->getUltimoElemento();
         $dataUltimaCreacion = json_decode($ultimoElementoStract, true)[0];
 
@@ -59,6 +67,17 @@ class ProgramacionSemanalUpdate
             'ingeniero_2' => $dataUltimaCreacion['inspector_2'],
             'realizado' => 0,
             'aplazo_fecha' => $dataUltimaCreacion['aplazoFecha'],
-        ]); 
+        ]);
+    }
+
+    public function updateAplazoFecha($request, $id)
+    {
+        $programacion = programacion_semanal::findOrFail($id);
+
+        $programacion->update([
+            "aplazo_fecha" => $request->input('aplazo_fecha')
+        ]);
+
+        return $programacion;
     }
 }

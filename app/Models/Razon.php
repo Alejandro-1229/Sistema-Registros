@@ -6,18 +6,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Licencia extends Model
+class Razon extends Model
 {
     use HasFactory;
 
-    protected $rimaryKey = 'idLice';
+    protected $primaryKey = 'idRazon';
 
-    public function control(): HasMany
+    public function actualizacionFecha():HasMany
     {
-        return $this->hasMany(control::class, 'idLicencia', 'idLice');
+        return $this->hasMany(Actualizacion_fecha::class, 'idRazon', 'idRazon');
     }
 
     protected $fillable = [
-        'activo'
+        'razon',
     ];
 }

@@ -16,18 +16,38 @@ class ProgramacionSemanalConsulta
         return $this->ServicesProgramacionSemanal = $ServicesProgramacionSemanal;
     }
 
-    public function getAll()
+    public function consultaEstado($id)
     {
-        $programacionSemanal = programacion_semanal::select('fechaInspeccion','local','direccion','ingeniero_1','ingeniero_2','realizado', 'aplazo_fecha')
-        ->where('programacion_semanals.realizado','=','0')
-        ->get();
+        $data = programacion_semanal::select('idPrSe','fechaInspeccion', 'local', 'direccion', 'ingeniero_1', 'ingeniero_2', 'realizado', 'aplazo_fecha')
+            ->where('programacion_semanals.realizado', '=', $id)
+            ->get();
 
-        if ($programacionSemanal->isEmpty()) {
-            $programacionSemanal = 'Por el momento no hay data';
-        } 
-        
+        if ($data->isEmpty()) { 
+            $data = 'Por el momento no hay data';
+        }
 
-        return $programacionSemanal;
+        return $data;
+    }
+
+    public function listPendiente()
+    {
+        $listadoPendientes = $this->consultaEstado("0");
+
+        return $listadoPendientes;
+    }
+
+    public function listCancelado()
+    {
+        $listadoCancelados = $this->consultaEstado("3");
+
+        return $listadoCancelados;
+    }
+
+    public function listSilencioPositivo()
+    {
+        $listadoSilencioPositivos = $this->consultaEstado("2");
+
+        return $listadoSilencioPositivos;
     }
 
     public function getUltimoElemento()
@@ -39,11 +59,7 @@ class ProgramacionSemanalConsulta
             ->get();
 
         $data = $this->ServicesProgramacionSemanal->extraccionDatosProgSemanal($programacionSemanalUnitario);
-        
+
         return $data;
     }
-
-
-
-    
 }

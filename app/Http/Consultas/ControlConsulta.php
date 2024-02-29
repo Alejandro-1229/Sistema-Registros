@@ -19,7 +19,8 @@ class ControlConsulta
     public function getAll()
     {
 
-        $result = control::with('tipoItse', 'nivelRiesgo', 'solicitud', 'areaRecepcion', 'licencia', 'funcion')->get();
+        $result = control::with('tipoItse', 'nivelRiesgo', 'solicitud', 'areaRecepcion', 'licencia', 'funcion')
+        ->paginate(1);
 
         $data = $this->ServicesControl->extraccionDatosControl($result);
 

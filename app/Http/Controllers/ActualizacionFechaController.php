@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\solencio_positivo;
+use App\Models\Actualizacion_fecha;
 use Illuminate\Http\Request;
 
-class SolencioPositivoController extends Controller
+class ActualizacionFechaController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function getAll()
+    public function index()
     {
-        
-    } 
+        //
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -34,7 +34,7 @@ class SolencioPositivoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(solencio_positivo $solencio_positivo)
+    public function show(Actualizacion_fecha $actualizacion_fecha)
     {
         //
     }
@@ -42,7 +42,7 @@ class SolencioPositivoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(solencio_positivo $solencio_positivo)
+    public function edit(Actualizacion_fecha $actualizacion_fecha)
     {
         //
     }
@@ -50,7 +50,7 @@ class SolencioPositivoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, solencio_positivo $solencio_positivo)
+    public function update(Request $request, Actualizacion_fecha $actualizacion_fecha)
     {
         //
     }
@@ -58,7 +58,7 @@ class SolencioPositivoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(solencio_positivo $solencio_positivo)
+    public function destroy(Actualizacion_fecha $actualizacion_fecha)
     {
         //
     }

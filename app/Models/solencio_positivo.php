@@ -12,8 +12,9 @@ class solencio_positivo extends Model
 
     protected $pimeryKey = 'idSiPo';
 
-    public function control():BelongsTo{
-        return $this->belongsTo(control::class,'idControl','idCont');
+    public function control(): BelongsTo
+    {
+        return $this->belongsTo(control::class, 'idControl', 'idCont');
     }
 
     protected $fillable = [

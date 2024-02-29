@@ -8,15 +8,16 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Solicitud extends Model
 {
-    use HasFactory; 
- 
+    use HasFactory;
+
     protected $primaryKey = 'idEsSo';
 
-    public function control():HasMany{
-        return $this->hasMany(control::class, 'idSolicitud','idEsSo');
+    public function control(): HasMany
+    {
+        return $this->hasMany(control::class, 'idSolicitud', 'idEsSo');
     }
 
     protected $fillable = [
         'solicitud'
     ];
-} 
+}

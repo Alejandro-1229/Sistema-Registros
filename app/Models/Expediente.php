@@ -10,14 +10,16 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Expediente extends Model
 {
     use HasFactory;
- 
+
     protected $primaryKey = 'idExpe';
 
-    public function control():BelongsTo{
+    public function control(): BelongsTo
+    {
         return $this->belongsTo(control::class, 'idControl', 'idCont');
     }
-    public function prorgamacionSemanal():HasMany{
-        return $this->hasMany(programacion::class, 'idExpediente','idExpe');
+    public function prorgamacionSemanal(): HasMany
+    {
+        return $this->hasMany(programacion::class, 'idExpediente', 'idExpe');
     }
 
     protected $fillable = [
@@ -34,6 +36,4 @@ class Expediente extends Model
         'hora',
         'ILO',
     ];
-
-    
 }

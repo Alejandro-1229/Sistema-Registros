@@ -9,35 +9,43 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class control extends Model
 {
-    use HasFactory; 
+    use HasFactory;
 
     protected $primaryKey = 'idCont';
 
-    public function tipoItse():BelongsTo{
+    public function tipoItse(): BelongsTo
+    {
         return $this->belongsTo(Tipo_Itse::class, 'idTipoItse', 'idTiIt');
     }
-    public function funcion():BelongsTo{
-        return $this->belongsTo(funcion::class,'idFuncion','idFunc');
+    public function funcion(): BelongsTo
+    {
+        return $this->belongsTo(funcion::class, 'idFuncion', 'idFunc');
     }
-    public function nivelRiesgo():BelongsTo{
+    public function nivelRiesgo(): BelongsTo
+    {
         return $this->belongsTo(Nivel_Riesgo::class, 'idNivelRiesgo', 'idNiRi');
     }
-    public function solicitud():BelongsTo{
+    public function solicitud(): BelongsTo
+    {
         return $this->belongsTo(solicitud::class, 'idSolicitud', 'idEsSo');
     }
-    public function licencia():BelongsTo{
+    public function licencia(): BelongsTo
+    {
         return $this->belongsTo(licencia::class, 'idLicencia', 'idLice');
     }
-    public function areaRecepcion():BelongsTo{
+    public function areaRecepcion(): BelongsTo
+    {
         return $this->belongsTo(Area_Recepcion::class, 'idAreaRecepcion', 'idArRe');
     }
-    public function expediente():HasMany{
-        return $this-> hasMany(expediente::class, 'idControl', 'idCont'); 
+    public function expediente(): HasMany
+    {
+        return $this->hasMany(expediente::class, 'idControl', 'idCont');
     }
-    public function programacion():HasMany{
-        return $this->hasMany(programacion::class,'idControl', 'idCont');
+    public function programacion(): HasMany
+    {
+        return $this->hasMany(programacion::class, 'idControl', 'idCont');
     }
-   
+
 
     protected $fillable = [
         'numeroExpediente',
