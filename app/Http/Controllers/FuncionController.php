@@ -15,7 +15,7 @@ class FuncionController extends Controller
     {
         try { 
 
-            $result = Funcion::all();
+            $result = Funcion::select('idFunc','funcion')->get();
 
             return ApiResponse::success("Solicitud Exitosa", 200, $result);
 

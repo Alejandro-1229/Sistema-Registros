@@ -16,7 +16,7 @@ class NivelRiesgoController extends Controller
         //
         try {
 
-            $result = Nivel_Riesgo::all();
+            $result = Nivel_Riesgo::select('idNiRi','nivel_riesgo')->get();
 
             return ApiResponse::success("Solicitud Exitosa", 200, $result);
 

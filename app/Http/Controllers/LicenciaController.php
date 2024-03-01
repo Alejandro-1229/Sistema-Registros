@@ -8,15 +8,13 @@ use Illuminate\Http\Request;
 
 class LicenciaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function getAll()
     {
         //
         try {
 
-            $result = Licencia::all();
+            $result = Licencia::select('idLice','activo')->get();
 
             return ApiResponse::success("Solicitud Exitosa", 200, $result);
 
@@ -25,9 +23,6 @@ class LicenciaController extends Controller
         }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create(Request $request)
     {
         //

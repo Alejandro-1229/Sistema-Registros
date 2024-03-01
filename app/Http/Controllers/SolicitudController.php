@@ -16,7 +16,7 @@ class SolicitudController extends Controller
         //
         try {
 
-            $result = Solicitud::all();
+            $result = Solicitud::select('idEsSo','solicitud')->get();
 
             return ApiResponse::success("Solicitud Exitosa", 200, $result);
 
@@ -25,51 +25,5 @@ class SolicitudController extends Controller
         }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Solicitud $solicitud)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Solicitud $solicitud)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Solicitud $solicitud)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Solicitud $solicitud)
-    {
-        //
-    }
+    
 }

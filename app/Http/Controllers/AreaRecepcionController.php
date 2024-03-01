@@ -16,7 +16,7 @@ class AreaRecepcionController extends Controller
         //
         try {
 
-            $result = Area_Recepcion::all();
+            $result = Area_Recepcion::select('idArRe','area')->get();
 
             return ApiResponse::success("Solicitud Exitosa", 200, $result);
 
