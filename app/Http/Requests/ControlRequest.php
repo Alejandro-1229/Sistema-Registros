@@ -39,7 +39,7 @@ class ControlRequest extends FormRequest
             'manzana' => 'nullable|string|max:10',
             'lote' => 'nullable|string|max:10',
             'tipoVia' => 'nullable|string|max:20',
-            'nombreVia' => 'nullable|string|max:40',
+            'nombreVia' => 'nullable|string|max:30',
             'numeroMunicipal' => 'nullable|string|max:50',
             'idLicencia' => 'nullable|integer',
             'idSolicitud' => 'nullable|integer',

@@ -14,16 +14,16 @@ class RazonSeeder extends Seeder
     public function run(): void
     {
         Razon::create([
-            'razon' => 'Por ausencia del la administradora o de la persoba a quien estela designe'
+            'razon' => 'Ausencia del la administradora o de la persoNa a quien estela designe'
         ]);
         Razon::create([
-            'razon' => 'Por la complejidad del establecimiento objeto de inspeccion'
+            'razon' => 'Complejidad del establecimiento objeto de inspeccion'
         ]);
         Razon::create([
-            'razon' => 'Por existir impedimientos para la verificacion de todo o parte del establecimiento objeto de inspeccion'
+            'razon' => 'Impedimientos para la verificacion de todo o parte del establecimiento objeto de inspeccion'
         ]);
         Razon::create([
-            'razon' => 'Por caso fortuito o caso mayor'
+            'razon' => 'Caso fortuito o caso mayor'
         ]);
         Razon::create([
             'razon' => 'Otro'

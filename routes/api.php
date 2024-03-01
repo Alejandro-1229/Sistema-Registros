@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActualizacionFechaController;
 use App\Http\Controllers\AreaRecepcionController;
 use App\Http\Controllers\ControlController;
 use App\Http\Controllers\ExpedienteController;
@@ -8,6 +9,7 @@ use App\Http\Controllers\LicenciaController;
 use App\Http\Controllers\NivelRiesgoController;
 use App\Http\Controllers\ProgramacionController;
 use App\Http\Controllers\ProgramacionSemanalController;
+use App\Http\Controllers\RazonController;
 use App\Http\Controllers\SolicitudController;
 use App\Http\Controllers\TipoItseController;
 use App\Models\programacion_semanal;
@@ -59,6 +61,13 @@ Route::prefix('v1/programacionSemanal')->group(function(){
     Route::patch('/updateAplazo/{id}', [ProgramacionSemanalController::class,'updateAplazoFecha']);
     Route::patch('/updateCancelar/{id}', [ProgramacionSemanalController::class,'updateCancelar']);
 });
+Route::prefix('v1/actualizarFecha')->group(function(){
+    Route::post('/', [ActualizacionFechaController::class,'create']);
+});
+
+
+
+
 Route::prefix('v1/licencias')->group(function(){
     Route::get('/', [LicenciaController::class,'getAll']);
 });
@@ -77,3 +86,7 @@ Route::prefix('v1/solicitudes')->group(function(){
 Route::prefix('v1/tipoItse')->group(function(){
     Route::get('/', [TipoItseController::class,'getAll']);
 });
+Route::prefix('v1/razon')->group(function(){
+    Route::get('/', [RazonController::class,'getAll']);
+});
+

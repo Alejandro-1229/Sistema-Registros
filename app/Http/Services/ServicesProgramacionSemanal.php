@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Services;
-
+ 
 class ServicesProgramacionSemanal
 {
     public function extraccionDatosProgSemanal($data)
@@ -11,14 +11,14 @@ class ServicesProgramacionSemanal
         } else {
             $extraccionData = function ($programacionSemanal) {
                 $data = [
+                    'numeroExpediente' => $programacionSemanal->numeroExpediente,
+                    'funcion' => $programacionSemanal->funcion,
                     'local' => $programacionSemanal->razonSocial,
                     'direccion' => $programacionSemanal->tipoVia . ' ' . $programacionSemanal->nombreVia . ' ' . $programacionSemanal->numeroMunicipal,
                     'inspector_1' => $programacionSemanal->inspector_1,
                     'inspector_2' => $programacionSemanal->inspector_2,
                     'fecha' => $programacionSemanal->fechaLimiteInspeccion,
-                    'aplazoFecha' => $programacionSemanal->aplazoFecha,
                     'estado' => $programacionSemanal->realizado
-
                 ];
 
                 return $data;
@@ -26,10 +26,6 @@ class ServicesProgramacionSemanal
 
             $dataFiltrada = $data->map($extraccionData);
         }
-
-
-
-
 
         return $dataFiltrada;
     }

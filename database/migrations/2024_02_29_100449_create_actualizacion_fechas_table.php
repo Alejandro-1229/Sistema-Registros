@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('actualizacion_fechas', function (Blueprint $table) {
-            $table->id(' idAcFe');
+            $table->id('idAcFe');
             $table->foreignId('idProgramacionSemanal')->constrained('programacion_semanals',  'idPrSe')->cascadeOnUpdate()->restrictOnDelete();
-            $table->date('fechaAnterior');
+            $table->date('fechaAnterior')->nullable();
             $table->date('fechaActualizada');
             $table->foreignId('idRazon')->constrained('razons', 'idRazon')->cascadeOnUpdate()->restrictOnDelete();
             $table->timestamps();

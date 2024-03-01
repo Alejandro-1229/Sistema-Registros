@@ -51,7 +51,7 @@ class ProgramacionSemanalUpdate
         $programacion = $this->updateStado($id, 3);
 
         return $programacion;
-    }
+    } 
 
     public function asignacionDatos($idPrSe)
     {
@@ -61,15 +61,19 @@ class ProgramacionSemanalUpdate
         $dataUpdate = programacion_semanal::findOrFail($idPrSe);
         $dataUpdate->update([
             'fechaInspeccion' => $dataUltimaCreacion['fecha'],
+            'numeroExp' => $dataUltimaCreacion['numeroExpediente'],
+            'funcs' => $dataUltimaCreacion['funcion'],
             'local' => $dataUltimaCreacion['local'],
             'direccion' => $dataUltimaCreacion['direccion'],
             'ingeniero_1' => $dataUltimaCreacion['inspector_1'],
             'ingeniero_2' => $dataUltimaCreacion['inspector_2'],
             'realizado' => 0,
-            'aplazo_fecha' => $dataUltimaCreacion['aplazoFecha'],
         ]);
-    }
+        
 
+        return $dataUpdate;
+    }
+/*
     public function updateAplazoFecha($request, $id)
     {
         $programacion = programacion_semanal::findOrFail($id);
@@ -80,4 +84,5 @@ class ProgramacionSemanalUpdate
 
         return $programacion;
     }
+*/
 }

@@ -18,13 +18,13 @@ class Actualizacion_fecha extends Model
     }
     public function programacionSemanal(): BelongsTo
     {
-        return $this->belongsTo(programacion_semanal::class, 'idProrgamacionSemanal', '$idPrSe');
+        return $this->belongsTo(programacion_semanal::class, 'idProgramacionSemanal', '$idPrSe');
     }
 
     protected $fillable = [
         'idProgramacionSemanal',
         'fechaAnterior',
-        'fechaActual',
-        'razon'
+        'fechaActualizada',
+        'idRazon'
     ];
 }

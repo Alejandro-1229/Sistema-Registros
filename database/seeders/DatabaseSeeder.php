@@ -27,5 +27,6 @@ class DatabaseSeeder extends Seeder
         $this->call(NivelRiesgoSeeder::class);
         $this->call(SolicitudSeeder::class);
         $this->call(RazonSeeder::class);
+        $this->call(TipoItseSeeder::class);
     }
 }

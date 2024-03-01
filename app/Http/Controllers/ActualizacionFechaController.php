@@ -3,63 +3,37 @@
 namespace App\Http\Controllers;
 
 use App\Models\Actualizacion_fecha;
+use App\Models\programacion_semanal;
 use Illuminate\Http\Request;
 
 class ActualizacionFechaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function create(Request $request)
     {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        $actualizarFecha = Actualizacion_fecha::create([
+            'idProgramacionSemanal' => $request->input('idProgramacionSemanal'),
+            'fechaAnterior' => null,
+            'fechaActualizada' => $request->input('fechaActualizada'),
+            'idRazon' => $request->input('idRazon')
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Actualizacion_fecha $actualizacion_fecha)
-    {
-        //
-    }
+        $actualizacionFecha = programacion_semanal::findOrFail($actualizarFecha->idProgramacionSemanal);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Actualizacion_fecha $actualizacion_fecha)
-    {
-        //
-    }
+        $actualizarFecha->update([
+            'fechaAnterior' => $actualizacionFecha->fechaInspeccion,
+        ]);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Actualizacion_fecha $actualizacion_fecha)
-    {
-        //
-    }
+        $actualizacionFecha->update([
+            'fechaInspeccion' => $actualizarFecha->fechaActualizada,
+        ]);
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Actualizacion_fecha $actualizacion_fecha)
-    {
-        //
+        
+
+        
+
+        return response()->json(["mensaje" => "Creación satisfactoria", "datos" => $actualizarFecha], 201, []);
+
     }
 }

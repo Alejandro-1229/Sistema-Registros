@@ -2,17 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Responses\ApiResponse;
 use App\Models\Razon;
 use Illuminate\Http\Request;
 
 class RazonController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+
+    public function getAll()
     {
-        //
+
+        try {
+
+            $razon = Razon::select('razon')->get();
+            return ApiResponse::success("Solicitud Exitosa", 200, $razon);
+        } catch (\Throwable $th) {
+            return ApiResponse::error($th->getMessage(), 500);
+        }
     }
 
     /**

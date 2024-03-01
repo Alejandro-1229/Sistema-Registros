@@ -63,7 +63,7 @@ class ProgramacionSemanalController extends Controller
             //creacion del elemento
             programacion_semanal::create([
                 'idExpediente' => $request->input('idExpediente'),
-
+ 
             ]);
 
             //extraccion del ultimo elemento creado
@@ -131,7 +131,7 @@ class ProgramacionSemanalController extends Controller
             return ApiResponse::error($th->getMessage(), 500);
         }
     }
-
+/*
     public function updateAplazoFecha(Request $request, $id)
     {
         try {
@@ -143,6 +143,5 @@ class ProgramacionSemanalController extends Controller
             return ApiResponse::error($th->getMessage(), 500);
         }
     }
-
-
+*/
 }

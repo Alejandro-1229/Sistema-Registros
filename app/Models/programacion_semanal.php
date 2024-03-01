@@ -24,12 +24,13 @@ class programacion_semanal extends Model
 
     protected $fillable = [
         'fechaInspeccion',
+        'numeroExp',
+        'funcs',
         'local',
         'direccion',
         'ingeniero_1',
         'ingeniero_2',
         'realizado',
-        'aplazo_fecha',
         'idExpediente',
     ];
 }

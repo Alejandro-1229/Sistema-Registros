@@ -4,7 +4,7 @@ namespace App\Http\Consultas;
 
 use App\Http\Services\ServicesProgramacionSemanal;
 use App\Models\Expediente;
-use App\Models\programacion_semanal;
+use App\Models\programacion_semanal; 
 use Carbon\Carbon;
 
 class ProgramacionSemanalConsulta
@@ -18,7 +18,7 @@ class ProgramacionSemanalConsulta
 
     public function consultaEstado($id)
     {
-        $data = programacion_semanal::select('idPrSe','fechaInspeccion', 'local', 'direccion', 'ingeniero_1', 'ingeniero_2', 'realizado', 'aplazo_fecha')
+        $data = programacion_semanal::select('idPrSe','fechaInspeccion','numeroExp', 'funcs', 'local', 'direccion', 'ingeniero_1', 'ingeniero_2', 'realizado')
             ->where('programacion_semanals.realizado', '=', $id)
             ->get();
 
@@ -36,13 +36,13 @@ class ProgramacionSemanalConsulta
         return $listadoPendientes;
     }
 
-    public function listCancelado()
+    public function listCancelado() 
     {
         $listadoCancelados = $this->consultaEstado("3");
 
         return $listadoCancelados;
     }
-
+ 
     public function listSilencioPositivo()
     {
         $listadoSilencioPositivos = $this->consultaEstado("2");
@@ -54,6 +54,7 @@ class ProgramacionSemanalConsulta
     {
         $programacionSemanalUnitario = programacion_semanal::join('expedientes', 'programacion_semanals.idExpediente', '=', 'expedientes.idExpe')
             ->join('controls', 'expedientes.idControl', '=', 'controls.idCont')
+            ->join('funcions', 'controls.idFuncion', '=', 'funcions.idFunc')
             ->orderBy('programacion_semanals.idPrSe', 'desc')
             ->take(1)
             ->get();

@@ -23,7 +23,7 @@ class ExpedienteRequest extends FormRequest
     {
         return [
             'ruc' => 'nullable|string|max:15',
-            'idControl' => 'required|integer',
+            'idControl' => 'required|integer|exists:controls,idCont',
             'fechaIngresoMesaPartes' => 'nullable|date',
             'fechaIngresoSGDC' => 'nullable|date',
             'fechaRecepcionInspeccion' => 'nullable|date',
