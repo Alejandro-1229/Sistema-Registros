@@ -93,7 +93,7 @@ class ProgramacionSemanalController extends Controller
             // Convertir la fecha de inspección a objeto Carbon
             $fechaInspeccion = Carbon::parse($dato['fechaInspeccion']);
         
-            // Comparar las fechas en que si fechaInspeccion es mayor a la nuevaFecha
+            // Comparar las fechas en que si fechaInspeccion es mayor a la fecha Actual;
             if ($fechaInspeccion->gt($nuevaFecha)) {
                 // Actualizar el campo "realizado" a 2
                 $dato['realizado'] = 2;
@@ -131,17 +131,4 @@ class ProgramacionSemanalController extends Controller
             return ApiResponse::error($th->getMessage(), 500);
         }
     }
-/*
-    public function updateAplazoFecha(Request $request, $id)
-    {
-        try {
-
-            $dataUpdateAplazoFecha = $this->ProgramacionSemanalUpdate->updateAplazoFecha($request, $id);
-
-            return ApiResponse::update('Update Date Succesfull', 200, $dataUpdateAplazoFecha);
-        } catch (\Throwable $th) {
-            return ApiResponse::error($th->getMessage(), 500);
-        }
-    }
-*/
 }

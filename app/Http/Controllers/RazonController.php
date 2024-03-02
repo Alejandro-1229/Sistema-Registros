@@ -14,7 +14,7 @@ class RazonController extends Controller
 
         try {
 
-            $razon = Razon::select('razon')->get();
+            $razon = Razon::select('idRazon','razon')->get();
             return ApiResponse::success("Solicitud Exitosa", 200, $razon);
         } catch (\Throwable $th) {
             return ApiResponse::error($th->getMessage(), 500);

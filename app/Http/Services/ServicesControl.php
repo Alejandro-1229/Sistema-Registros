@@ -10,6 +10,7 @@ class ServicesControl{
         } else {
             $extraccionDatos = function ($funcion) {
                 $data = [
+                    'idControl' => $funcion->idCont,
                     'numeroExpediente' => $funcion->numeroExpediente,
                     'tipoItse' => $funcion->tipoItse->tipo_itse,
                     'funcion' => $funcion->funcion->funcion,

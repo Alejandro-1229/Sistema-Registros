@@ -46,6 +46,7 @@ Route::prefix('v1/controles')->group(function(){
 Route::prefix('v1/expedientes')->group(function(){
     Route::get('/', [ExpedienteController::class,'getAll']);
     Route::post('/', [ExpedienteController::class,'create']);
+    Route::put('/{id}', [ExpedienteController::class,'update']);
 });
 Route::prefix('v1/programaciones')->group(function(){
     Route::get('/', [ProgramacionController::class,'getAll']);
@@ -64,8 +65,6 @@ Route::prefix('v1/programacionSemanal')->group(function(){
 Route::prefix('v1/actualizarFecha')->group(function(){
     Route::post('/', [ActualizacionFechaController::class,'create']);
 });
-
-
 
 
 Route::prefix('v1/licencias')->group(function(){

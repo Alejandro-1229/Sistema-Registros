@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('direccion')->nullable();
             $table->string('ingeniero_1')->nullable();
             $table->string('ingeniero_2')->nullable();
+            $table->char('estado',1)->nullable();
             $table->char('realizado',1)->nullable();
             $table->foreignId('idExpediente')->constrained('expedientes','idExpe')->cascadeOnUpdate()->nullOnDelete();
             $table->timestamps();
