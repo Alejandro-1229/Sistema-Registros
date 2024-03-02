@@ -11,6 +11,7 @@ class ServicesProgramacion
         } else {
             $extraccionDatos = function ($programacion) {
                 $data = [
+                    'idProg' => $programacion-> idProg,
                     'numeroExpediente' => $programacion->numeroExpediente,
                     'nombreComercial' => $programacion->razonSocial . ' - ' . $programacion->nombreEstablecimiento,
                     'direccion' => $programacion->tipoVia . ' ' . $programacion->nombreVia . ' ' . $programacion->numeroMunicipal,

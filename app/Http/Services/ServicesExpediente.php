@@ -12,6 +12,7 @@ class ServicesExpediente{
         } else {
             $selected_data = function($expediente){
                 $data = [
+                    'idExpe' => $expediente->idExpe,
                     'numeroExpediente' => $expediente->numeroExpediente,
                     'ruc' => $expediente->ruc,
                     'nombreComercial' => $expediente->razonSocial,
