@@ -2,7 +2,6 @@
 
 namespace App\Http\Consultas;
 
-use App\Http\Requests\ControlRequest;
 use App\Http\Services\ServicesControl;
 use App\Models\control;
 
@@ -16,15 +15,25 @@ class ControlConsulta
         $this->ServicesControl = $ServicesControl;
     }
 
+    private $perPage = 10;
+
     public function getAll()
     {
 
         $result = control::with('tipoItse', 'nivelRiesgo', 'solicitud', 'areaRecepcion', 'licencia', 'funcion')
-        ->paginate(1);
+                        ->orderBy('idCont')
+                        ->paginate($this->perPage);
 
         $data = $this->ServicesControl->extraccionDatosControl($result);
 
-        return $data;
+        $totalPages = $result->lastPage();
+
+        $datas = [
+            'Total Paginas' => $totalPages,
+            'Datos Obtenidos' => $data
+        ];
+
+        return $datas;
     }
 
     public function create($request)
@@ -108,15 +117,23 @@ class ControlConsulta
         if (is_int($id)) {
             $funcionControl = control::with('tipoItse', 'nivelRiesgo', 'solicitud', 'areaRecepcion', 'licencia', 'funcion')
                 ->where('controls.idFuncion', "=", $id)
-                ->get();
+                ->orderBy('idCont')
+                ->paginate($this->perPage);
+
+            $totalPages = $funcionControl->lastPage();
 
             $data = $this->ServicesControl->extraccionDatosControl($funcionControl);
+
+            $datas = [
+                'Total Paginas' => $totalPages,
+                'Datos Obtenidos' => $data
+            ];
         } else {
-            $data = 'Incompatibilidad de datos de entrada';
+            $datas = 'Incompatibilidad de datos de entrada';
         }
 
 
-        return $data;
+        return $datas;
     }
 
     public function filtroTipoItse(int $tipoItse)
@@ -124,14 +141,23 @@ class ControlConsulta
         if (is_int($tipoItse)) {
             $tipoItseControl = control::with('tipoItse', 'nivelRiesgo', 'solicitud', 'areaRecepcion', 'licencia', 'funcion')
                 ->where('controls.idTipoItse', "=", $tipoItse)
-                ->get();
+                ->orderBy('idCont')
+                ->paginate($this->perPage);
+
+            $totalPages = $tipoItseControl->lastPage();
 
             $data = $this->ServicesControl->extraccionDatosControl($tipoItseControl);
+
+            $datas = [
+                'Total Paginas' => $totalPages,
+                'Datos' => $data
+            ];
+
         } else {
-            $data = 'Incompatibilidad de datos de entrada';
+            $datas = 'Incompatibilidad de datos de entrada';
         }
 
-        return $data;
+        return $datas;
     }
 
     public function filtroNumeroExpediente(string $numeroExpediente)
@@ -148,6 +174,4 @@ class ControlConsulta
 
         return $data;
     }
-
-    
 }

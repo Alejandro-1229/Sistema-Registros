@@ -4,7 +4,9 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\Solicitud;
+use App\Models\control;
+use App\Models\Expediente;
+use App\Models\programacion_semanal;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -28,5 +30,9 @@ class DatabaseSeeder extends Seeder
         $this->call(SolicitudSeeder::class);
         $this->call(RazonSeeder::class);
         $this->call(TipoItseSeeder::class);
+
+        control::factory(5000)->create();
+        Expediente::factory(5000)->create();
+        programacion_semanal::factory(5000)->create();
     }
 }

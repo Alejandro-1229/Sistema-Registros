@@ -30,7 +30,7 @@ return new class extends Migration
             $table->string('manzana',10)->nullable();
             $table->string('lote',10)->nullable();
             $table->string('tipoVia',20)->nullable();
-            $table->string('nombreVia',30)->nullable();
+            $table->string('nombreVia',200)->nullable();
             $table->string('numeroMunicipal',50);
             $table->foreignId('idLicencia')->constrained('licencias','idLice')->cascadeOnUpdate()->nullOnDelete();
             $table->foreignId('idSolicitud')->constrained('solicituds','idEsSo')->cascadeOnUpdate()->nullOnDelete();

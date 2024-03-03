@@ -2,19 +2,19 @@
 
 namespace App\Http\Consultas;
 
-use App\Http\Services\ServicesProgramacionSemanal;
-use App\Models\Expediente;
 use App\Models\programacion_semanal; 
-use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class ProgramacionSemanalConsulta
 {
+    /*
     protected $ServicesProgramacionSemanal;
 
     public function __construct(ServicesProgramacionSemanal $ServicesProgramacionSemanal)
     {
         return $this->ServicesProgramacionSemanal = $ServicesProgramacionSemanal;
     }
+    */
 
     public function consultaEstado($id)
     {
@@ -50,17 +50,21 @@ class ProgramacionSemanalConsulta
         return $listadoSilencioPositivos;
     }
 
-    public function getUltimoElemento()
+    public function getUltimoElemento($id)
     {
-        $programacionSemanalUnitario = programacion_semanal::join('expedientes', 'programacion_semanals.idExpediente', '=', 'expedientes.idExpe')
-            ->join('controls', 'expedientes.idControl', '=', 'controls.idCont')
-            ->join('funcions', 'controls.idFuncion', '=', 'funcions.idFunc')
-            ->orderBy('programacion_semanals.idPrSe', 'desc')
-            ->take(1)
-            ->get();
+        $programacionSemanalUnitario = programacion_semanal::select( 'expedientes.fechaLimiteInspeccion AS fecha',
+                                                            'controls.numeroExpediente AS numeroExpediente', 
+                                                            DB::raw("CONCAT(controls.tipoVia, ' ', controls.nombreVia, ' N.º', controls.numeroMunicipal) AS direccion"),
+                                                            'controls.razonSocial AS local',
+                                                            'funcions.funcion AS funcion', 
+                                                            'controls.inspector_1 AS inspector_1', 
+                                                            'controls.inspector_2 AS inspector_2')
+                                        ->join('expedientes', 'programacion_semanals.idExpediente', '=', 'expedientes.idExpe')
+                                        ->join('controls', 'expedientes.idControl', '=', 'controls.idCont')
+                                        ->join('funcions', 'controls.idFuncion', '=', 'funcions.idFunc')
+                                        ->where('programacion_semanals.idPrSe','=',$id)
+                                        ->get();
 
-        $data = $this->ServicesProgramacionSemanal->extraccionDatosProgSemanal($programacionSemanalUnitario);
-
-        return $data;
+        return $programacionSemanalUnitario;
     }
 }

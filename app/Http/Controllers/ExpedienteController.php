@@ -8,7 +8,7 @@ use App\Http\Requests\ExpedienteRequest;
 use App\Http\Responses\ApiResponse;
 
 class ExpedienteController extends Controller
-{
+{ 
     
     protected $ExpedienteConsulta;
     protected $ExpedienteUpdate;
@@ -22,7 +22,6 @@ class ExpedienteController extends Controller
     public function getAll() 
     {
         try {
-            //$result = Expediente::with('control.tipoItse')->get();
 
             $extract_data = $this->ExpedienteConsulta->getAll();
 

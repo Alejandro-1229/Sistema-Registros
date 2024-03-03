@@ -2,12 +2,11 @@
 
 namespace App\Http\Consultas;
 
-use App\Http\Requests\ExpedienteRequest;
 use App\Http\Services\ServicesExpediente;
 use App\Models\Expediente;
 
 class ExpedienteConsulta
-{
+{ 
 
     protected $ServicesExpediente;
 
@@ -16,16 +15,26 @@ class ExpedienteConsulta
         return $this->ServicesExpediente = $ServicesExpediente;
     }
 
+    private $perPage = 10;
+
     public function getAll()
     {
         $expedientes = Expediente::join('controls', 'expedientes.idControl', '=', 'controls.idCont')
             ->join('tipo__itses', 'controls.idTipoItse', '=', 'tipo__itses.idTiIt')
             ->join('nivel__riesgos', 'controls.idNivelRiesgo', '=', 'nivel__riesgos.idNiRi')
-            ->get();
+            ->orderBy('idExpe')
+            ->paginate($this->perPage);
+
+        $totalPages = $expedientes->lastPage();
 
         $dataExpediente  = $this->ServicesExpediente->extraccionDatosExpediente($expedientes);
 
-        return $dataExpediente;
+        $data = [
+            'Total Paginas' => $totalPages,
+            'Datos' => $dataExpediente
+        ];
+
+        return $data;
     }
 
 

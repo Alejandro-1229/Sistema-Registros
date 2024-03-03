@@ -8,7 +8,6 @@ use App\Http\Requests\ProgramacionSemanalRequest;
 use App\Http\Responses\ApiResponse;
 use App\Models\programacion_semanal;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 
 class ProgramacionSemanalController extends Controller
 {
@@ -61,18 +60,14 @@ class ProgramacionSemanalController extends Controller
     {
         try {
             //creacion del elemento
-            programacion_semanal::create([
+            $newData = programacion_semanal::create([
                 'idExpediente' => $request->input('idExpediente'),
- 
             ]);
 
-            //extraccion del ultimo elemento creado
-            $ultimaCreacion = programacion_semanal::latest()->first();
+            //extraccion del id del elemento creado
+            $idNewData = $newData->idPrSe;
 
-            //se guarda el id en una variable
-            $idPrSe = $ultimaCreacion['idPrSe'];
-
-            $dataUpdate = $this->ProgramacionSemanalUpdate->asignacionDatos($idPrSe);
+            $dataUpdate = $this->ProgramacionSemanalUpdate->asignacionDatos($idNewData);
 
             return ApiResponse::success('Create Succesfull', 201, $dataUpdate);
         } catch (\Throwable $th) {
@@ -83,6 +78,8 @@ class ProgramacionSemanalController extends Controller
 
     public function verificacionFechas()
     {
+        $rpta = '';
+
         //extraccion de la feha actual
         $fechaActual = Carbon::now();
         $nuevaFecha = $fechaActual->subHours(5);
@@ -93,14 +90,14 @@ class ProgramacionSemanalController extends Controller
             // Convertir la fecha de inspección a objeto Carbon
             $fechaInspeccion = Carbon::parse($dato['fechaInspeccion']);
         
-            // Comparar las fechas en que si fechaInspeccion es mayor a la fecha Actual;
-            if ($fechaInspeccion->gt($nuevaFecha)) {
+            // Comparar las fechas en que si fechaInspeccion es menor a la fecha Actual;
+            if ($fechaInspeccion->lt($nuevaFecha)) {
                 // Actualizar el campo "realizado" a 2
                 $dato['realizado'] = 2;
 
                 $this->ProgramacionSemanalUpdate->updateSilencioPositivo($dato['idPrSe']);
 
-                $rpta = "Se actualizó el campo 'realizado' para el ID {$dato['idPrSe']} a 2<br>";
+                $rpta .= "Se actualizó el campo 'realizado' para el ID {$dato['idPrSe']} a 2<br>";
                 
             }
         }

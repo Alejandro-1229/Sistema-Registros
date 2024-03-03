@@ -23,7 +23,7 @@ class ProgramacionSemanalRequest extends FormRequest
     {
         return [
             'idExpediente' => 'required|integer|exists:expedientes,idExpe',
-            'aplazp_fecha' => 'date'
+            'aplazo_fecha' => 'date'
         ];
     }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Consultas;
 
 use App\Models\Expediente;
 
-class ExpedienteUpdate
+class ExpedienteUpdate 
 {
     public function updateExpediente($request, int $id){
         $updateExpediente = Expediente::findOrFail($id);

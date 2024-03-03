@@ -55,7 +55,7 @@ class ProgramacionSemanalUpdate
 
     public function asignacionDatos($idPrSe)
     {
-        $ultimoElementoStract = $this->ProgramacionSemanalConsulta->getUltimoElemento();
+        $ultimoElementoStract = $this->ProgramacionSemanalConsulta->getUltimoElemento($idPrSe);
         $dataUltimaCreacion = json_decode($ultimoElementoStract, true)[0];
 
         $dataUpdate = programacion_semanal::findOrFail($idPrSe);
@@ -73,16 +73,4 @@ class ProgramacionSemanalUpdate
 
         return $dataUpdate;
     }
-/*
-    public function updateAplazoFecha($request, $id)
-    {
-        $programacion = programacion_semanal::findOrFail($id);
-
-        $programacion->update([
-            "aplazo_fecha" => $request->input('aplazo_fecha')
-        ]);
-
-        return $programacion;
-    }
-*/
 }

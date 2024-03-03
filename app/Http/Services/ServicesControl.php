@@ -6,7 +6,7 @@ class ServicesControl{
  
     public function extraccionDatosControl($result){
         if ($result->isEmpty()) {
-            $controles = 'No hay data en este apartado';
+            $controles = 'No hay data';
         } else {
             $extraccionDatos = function ($funcion) {
                 $data = [

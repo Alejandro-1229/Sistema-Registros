@@ -26,7 +26,7 @@ class ControlController extends Controller
         try {
 
             $controles = $this->ControlConsulta->getAll();
-
+            
             return ApiResponse::success("Solicitud Exitosa", 200, $controles);
         } catch (\Throwable $th) {
             return ApiResponse::error($th->getMessage(), 500);
