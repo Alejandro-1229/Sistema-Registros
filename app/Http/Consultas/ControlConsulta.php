@@ -21,7 +21,7 @@ class ControlConsulta
     {
 
         $result = control::with('tipoItse', 'nivelRiesgo', 'solicitud', 'areaRecepcion', 'licencia', 'funcion')
-                        ->orderBy('idCont')
+                        ->orderBy('idCont','desc')
                         ->paginate($this->perPage);
 
         $data = $this->ServicesControl->extraccionDatosControl($result);

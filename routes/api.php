@@ -58,6 +58,7 @@ Route::prefix('v1/programacionSemanal')->group(function(){
     Route::get('/listadoPendientes', [ProgramacionSemanalController::class,'listPendiente']); 
     Route::get('/listadoSilencioPositivo', [ProgramacionSemanalController::class,'listSilencioPositivo']);
     Route::get('/listadoCancelados', [ProgramacionSemanalController::class,'listCancelado']);
+    Route::get('/listadoFechas/{fecha1}/{fecha2}', [ProgramacionSemanalController::class,'listFecha']);
     Route::get('/verificacionFecha',[ProgramacionSemanalController::class, 'verificacionFechas']);
     Route::patch('/updatePendiente/{id}', [ProgramacionSemanalController::class,'updatePendiente']);
     Route::patch('/updateAplazo/{id}', [ProgramacionSemanalController::class,'updateAplazoFecha']);

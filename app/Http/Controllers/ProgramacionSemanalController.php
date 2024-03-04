@@ -129,4 +129,10 @@ class ProgramacionSemanalController extends Controller
             return ApiResponse::error($th->getMessage(), 500);
         }
     }
+
+    public function listFecha($fecha1, $fecha2){
+        $listaFechas = programacion_semanal::whereBetween('fechaInspeccion',[$fecha1,$fecha2])->get();
+
+        return $listaFechas;
+    }
 }

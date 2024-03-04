@@ -21,7 +21,8 @@ class ProgramacionConsulta
             $programaciones = Programacion::join('controls', 'programacions.idControl', '=', 'controls.idCont')
                                         ->join('tipo__itses', 'controls.idTipoItse', '=', 'tipo__itses.idTiIt')
                                         ->join('nivel__riesgos', 'controls.idNivelRiesgo', '=', 'nivel__riesgos.idNiRi')
-                                        ->get();
+                                        ->orderBy('programacions.idProg','desc')
+                                        ->paginate(10);
 
 
             $data = $this->ServicesProgramacion->extraccionDatosProgramacion($programaciones);

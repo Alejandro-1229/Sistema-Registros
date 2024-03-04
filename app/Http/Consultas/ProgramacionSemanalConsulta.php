@@ -21,13 +21,21 @@ class ProgramacionSemanalConsulta
         $data = programacion_semanal::select('idPrSe','fechaInspeccion','numeroExp', 'funcs', 'local', 'direccion', 'ingeniero_1', 'ingeniero_2', 'realizado','estado')
             ->join('estados','estados.idEsta','=','programacion_semanals.idEstado')
             ->where('programacion_semanals.realizado', '=', $id)
-            ->get();
+            ->orderBy('programacion_semanals.fechaInspeccion','desc')
+            ->paginate(10);
+
+        $totalPages = $data->lastPage();
 
         if ($data->isEmpty()) { 
             $data = 'Por el momento no hay data';
         }
 
-        return $data;
+        $datas = [
+            'Total paginas' => $totalPages,
+            'Data' => $data
+        ];
+
+        return $datas;
     }
 
     public function listPendiente()

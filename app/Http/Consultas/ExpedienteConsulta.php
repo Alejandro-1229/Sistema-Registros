@@ -23,7 +23,7 @@ class ExpedienteConsulta
             ->join('tipo__itses', 'controls.idTipoItse', '=', 'tipo__itses.idTiIt')
             ->join('nivel__riesgos', 'controls.idNivelRiesgo', '=', 'nivel__riesgos.idNiRi')
             ->join('estados','estados.idEsta','=','expedientes.idEstado')
-            ->orderBy('idExpe')
+            ->orderBy('idExpe','desc')
             ->paginate($this->perPage);
 
         $totalPages = $expedientes->lastPage(); 
