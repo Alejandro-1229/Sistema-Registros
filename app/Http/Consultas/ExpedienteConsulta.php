@@ -22,10 +22,11 @@ class ExpedienteConsulta
         $expedientes = Expediente::join('controls', 'expedientes.idControl', '=', 'controls.idCont')
             ->join('tipo__itses', 'controls.idTipoItse', '=', 'tipo__itses.idTiIt')
             ->join('nivel__riesgos', 'controls.idNivelRiesgo', '=', 'nivel__riesgos.idNiRi')
+            ->join('estados','estados.idEsta','=','expedientes.idEstado')
             ->orderBy('idExpe')
             ->paginate($this->perPage);
 
-        $totalPages = $expedientes->lastPage();
+        $totalPages = $expedientes->lastPage(); 
 
         $dataExpediente  = $this->ServicesExpediente->extraccionDatosExpediente($expedientes);
 
@@ -49,7 +50,7 @@ class ExpedienteConsulta
             'recepcionLicenciaFuncionamiento' => $request->input('recepcionLicenciaFuncionamiento'),
             'fechaLimiteInspeccion' => $request->input('fechaLimiteInspeccion'),
             'numeroInforme' => $request->input('numeroInforme'),
-            'estado' => $request->input('estado'),
+            'idEstado' => 1,
             'fecha' => $request->input('fecha'),
             'hora' => $request->input('hora'),
             'ILO' => $request->input('ILO')

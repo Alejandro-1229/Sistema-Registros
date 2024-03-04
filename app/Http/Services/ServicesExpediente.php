@@ -25,7 +25,7 @@ class ServicesExpediente{
                     'recepcionLicenciaFuncionamiento' => $expediente->recepcionLicenciaFuncionamiento,
                     'fechaLimiteInspeccion' => $expediente->fechaLimiteInspeccion,
                     'numeroInforme' => $expediente->numeroInforme,
-                    'estado' => $expediente->estado,
+                    'estado' => $expediente->idEstado,
                     'fecha' => $expediente->fecha,
                     'hora' => $expediente->hora,
                     'inspectores' => $expediente->inspector_1.', '.$expediente->inspector_2,

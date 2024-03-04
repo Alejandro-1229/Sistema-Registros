@@ -3,6 +3,7 @@
 use App\Http\Controllers\ActualizacionFechaController;
 use App\Http\Controllers\AreaRecepcionController;
 use App\Http\Controllers\ControlController;
+use App\Http\Controllers\EstadoController;
 use App\Http\Controllers\ExpedienteController;
 use App\Http\Controllers\FuncionController;
 use App\Http\Controllers\LicenciaController;
@@ -87,5 +88,8 @@ Route::prefix('v1/tipoItse')->group(function(){
 });
 Route::prefix('v1/razon')->group(function(){
     Route::get('/', [RazonController::class,'getAll']);
+});
+Route::prefix('v1/estado')->group(function(){
+    Route::get('/', [EstadoController::class,'getAll']);
 });
 

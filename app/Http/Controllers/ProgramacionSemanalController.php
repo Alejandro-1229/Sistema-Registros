@@ -21,7 +21,7 @@ class ProgramacionSemanalController extends Controller
         $this->ProgramacionSemanalUpdate = $ProgramacionSemanalUpdate;
     }
 
-    public function listPendiente()
+    public function listPendiente() 
     {
         try {
 
@@ -62,6 +62,7 @@ class ProgramacionSemanalController extends Controller
             //creacion del elemento
             $newData = programacion_semanal::create([
                 'idExpediente' => $request->input('idExpediente'),
+                'idEstado' => 1,
             ]);
 
             //extraccion del id del elemento creado

@@ -17,7 +17,7 @@ class ExpedienteUpdate
             'recepcionLicenciaFuncionamiento' =>$request->input('recepcionLicenciaFuncionamiento'),
             'fechaLimiteInspeccion' => $request->input('fechaLimiteInspeccion'),
             'numeroInforme' => $request->input('numeroInforme'),
-            'estado' => $request->input('estado'),
+            'idEstado' => $request->input('idEstado'),
             'fecha' => $request->input('fecha'),
             'hora' => $request->input('hora'),
             'ILO' => $request->input('ILO'),

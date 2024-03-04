@@ -67,6 +67,7 @@ class ProgramacionSemanalUpdate
             'direccion' => $dataUltimaCreacion['direccion'],
             'ingeniero_1' => $dataUltimaCreacion['inspector_1'],
             'ingeniero_2' => $dataUltimaCreacion['inspector_2'],
+            'idEstado' => 1,
             'realizado' => 0,
         ]);
         

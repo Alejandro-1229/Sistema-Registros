@@ -17,6 +17,11 @@ class Expediente extends Model
     {
         return $this->belongsTo(control::class, 'idControl', 'idCont');
     }
+
+    public function estado(): BelongsTo{
+        return $this->belongsTo(Estado::class,'idEstado','idEsta');
+    }
+
     public function prorgamacionSemanal(): HasMany
     {
         return $this->hasMany(programacion::class, 'idExpediente', 'idExpe');
@@ -31,7 +36,7 @@ class Expediente extends Model
         'recepcionLicenciaFuncionamiento',
         'fechaLimiteInspeccion',
         'numeroInforme',
-        'estado',
+        'idEstado',
         'fecha',
         'hora',
         'ILO',

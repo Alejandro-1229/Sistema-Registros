@@ -18,7 +18,8 @@ class ProgramacionSemanalConsulta
 
     public function consultaEstado($id)
     {
-        $data = programacion_semanal::select('idPrSe','fechaInspeccion','numeroExp', 'funcs', 'local', 'direccion', 'ingeniero_1', 'ingeniero_2', 'realizado')
+        $data = programacion_semanal::select('idPrSe','fechaInspeccion','numeroExp', 'funcs', 'local', 'direccion', 'ingeniero_1', 'ingeniero_2', 'realizado','estado')
+            ->join('estados','estados.idEsta','=','programacion_semanals.idEstado')
             ->where('programacion_semanals.realizado', '=', $id)
             ->get();
 
@@ -58,10 +59,12 @@ class ProgramacionSemanalConsulta
                                                             'controls.razonSocial AS local',
                                                             'funcions.funcion AS funcion', 
                                                             'controls.inspector_1 AS inspector_1', 
-                                                            'controls.inspector_2 AS inspector_2')
+                                                            'controls.inspector_2 AS inspector_2',
+                                                            'estados.estado AS estado')
                                         ->join('expedientes', 'programacion_semanals.idExpediente', '=', 'expedientes.idExpe')
                                         ->join('controls', 'expedientes.idControl', '=', 'controls.idCont')
                                         ->join('funcions', 'controls.idFuncion', '=', 'funcions.idFunc')
+                                        ->join('estados','estados.idEsta','=','programacion_semanals.idEstado')
                                         ->where('programacion_semanals.idPrSe','=',$id)
                                         ->get();
 

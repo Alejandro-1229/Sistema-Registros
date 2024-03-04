@@ -25,7 +25,7 @@ class ExpedienteFactory extends Factory
             'recepcionLicenciaFuncionamiento' => $this->faker->date(),
             'fechaLimiteInspeccion' => $this->faker->dateTimeBetween('2024-01-01', '2024-04-30'),
             'numeroInforme' => $this->faker->unique()->regexify('[A-Z0-9]{8}'),
-            'estado' => $this->faker->numberBetween(1,3),
+            'idEstado' => $this->faker->numberBetween(1,3),
             'fecha' => $this->faker->date(),
             'hora' => $this->faker->time(),
             'ILO' => $this->faker->date(),

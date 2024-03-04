@@ -30,7 +30,7 @@ class ExpedienteRequest extends FormRequest
             'recepcionLicenciaFuncionamiento' => 'nullable|date',
             'fechaLimiteInspeccion' => 'nullable|date',
             'numeroInforme' => 'nullable|max:10',
-            'estado' => 'nullable',
+            'idEstado' => 'integer',
             'fecha' => 'nullable|date',
             'hora' => 'nullable',
             'ILO' => 'nullable|date'

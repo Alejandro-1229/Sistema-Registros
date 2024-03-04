@@ -17,6 +17,11 @@ class programacion_semanal extends Model
     {
         return $this->belongsTo(control::class, 'idExpediente', 'idExpe');
     }
+
+    public function estado(): BelongsTo{
+        return $this->belongsTo(Estado::class,'idEstado','idEsta');
+    }
+
     public function actualizacionFecha(): HasMany
     {
         return $this->hasMany(Actualizacion_fecha::class, 'idProgramacionSemanal', 'idPrSe');
@@ -30,6 +35,7 @@ class programacion_semanal extends Model
         'direccion',
         'ingeniero_1',
         'ingeniero_2',
+        'idEstado',
         'realizado',
         'idExpediente',
     ];

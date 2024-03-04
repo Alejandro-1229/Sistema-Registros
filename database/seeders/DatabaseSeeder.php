@@ -30,9 +30,9 @@ class DatabaseSeeder extends Seeder
         $this->call(SolicitudSeeder::class);
         $this->call(RazonSeeder::class);
         $this->call(TipoItseSeeder::class);
+        $this->call(EstadoSeeder::class);
 
         control::factory(5000)->create();
         Expediente::factory(5000)->create();
-        programacion_semanal::factory(5000)->create();
     }
 }

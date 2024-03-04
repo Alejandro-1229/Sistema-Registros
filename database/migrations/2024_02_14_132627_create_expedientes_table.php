@@ -21,7 +21,7 @@ return new class extends Migration
             $table->date('recepcionLicenciaFuncionamiento')->nullable();
             $table->date('fechaLimiteInspeccion')->nullable();
             $table->string('numeroInforme',10)->nullable();
-            $table->boolean('estado')->nullable();
+            $table->foreignId('idEstado')->constrained('estados','idEsta')->cascadeOnUpdate()->restrictOnDelete();
             $table->date('fecha')->nullable();
             $table->time('hora')->nullable();
             $table->date('ILO')->nullable();
