@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RazonSeeder::class);
         $this->call(TipoItseSeeder::class);
         $this->call(EstadoSeeder::class);
+        $this->call(TipoUsuarioSeeder::class);
 
         control::factory(5000)->create();
         Expediente::factory(5000)->create();
